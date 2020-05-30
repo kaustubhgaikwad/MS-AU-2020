@@ -35,23 +35,22 @@ export class LoginComponent implements OnInit {
     @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
 
   signIn(credentials){
+    console.log("asda="+credentials)
     this.authService.login(credentials)
-      .subscribe(result => { 
-        if (result){
-          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-          this.isAdmin=this.authService.isAdmin();
-          if(this.isAdmin)
-          this.router.navigate([returnUrl || '/admin']);
-          else{
-            this.router.navigate(['/student']);
-          }
-      }else  
-          this.invalidLogin = true; 
-      });
+       .subscribe(result => { 
+         if (result){
+           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+           this.isAdmin=this.authService.isAdmin();
+           if(this.isAdmin)
+           this.router.navigate([returnUrl || '/admin']);
+           else{
+             this.router.navigate(['/student']);
+           }
+       }else  
+           this.invalidLogin = true; 
+       });
     //console.log(this.form.get('account.username'));
   }
-
-  
 
   
   ngOnInit() {

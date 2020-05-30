@@ -17,6 +17,8 @@ import { StudentComponent } from './student/student.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { StudentAuthGuard } from './services/student-auth-guard.service';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +30,8 @@ import { StudentAuthGuard } from './services/student-auth-guard.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
@@ -50,9 +54,11 @@ import { StudentAuthGuard } from './services/student-auth-guard.service';
     AuthService,
     AuthGuard,
     AdminAuthGuard,
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions],
+    StudentAuthGuard
+    // fakeBackendProvider,
+    // MockBackend,
+    //BaseRequestOptions
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
