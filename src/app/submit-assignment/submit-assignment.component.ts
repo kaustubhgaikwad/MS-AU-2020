@@ -6,17 +6,17 @@ import { StudentService } from '../services/student.service';
 import { StudentAssignmentService } from '../services/student-assignment.service';
 
 @Component({
-  selector: 'assignment-details',
-  templateUrl: './assignment-details.component.html',
-  styleUrls: ['./assignment-details.component.css']
+  selector: 'app-submit-assignment',
+  templateUrl: './submit-assignment.component.html',
+  styleUrls: ['./submit-assignment.component.css']
 })
-export class AssignmentDetailsComponent implements OnInit {
+export class SubmitAssignmentComponent implements OnInit {
   currentAssignment = null;
-  currentSolution:"";
+  currentSolution= "  ";
   message = '';
   UserData:any;
   solution:any;
-  isSubmitted:boolean;
+  isSubmitted=false;
   SubmittedAssignment=null;
 
   constructor(private assignmentService: AssignmentService,
@@ -29,17 +29,20 @@ export class AssignmentDetailsComponent implements OnInit {
     ngOnInit() {
       this.message = '';
       this.getAssignment(this.route.snapshot.paramMap.get('id'));
-      //this.getAssignnmentRecord(this.route.snapshot.paramMap.get('id'),localStorage.getItem('email'));
+      this.getAssignnmentRecord(this.route.snapshot.paramMap.get('id'),localStorage.getItem('email'));
     }
 
-    getAssignnmentRecord(title,email){
-      this.studentAssignmentService.getRecord(title,email).subscribe(
+    getAssignnmentRecord(id,email){
+      this.studentAssignmentService.getRecord(id,email).subscribe(
         data=>{
             if(data){
               this.SubmittedAssignment=data;
               this.isSubmitted=true;
               this.currentSolution=this.SubmittedAssignment.solution
+              console.log("sol="+this.SubmittedAssignment.solution)
+              this.message="You have already submitted this assignment, you can still update it"
             }else{
+              console.log("else");
               this.isSubmitted=false;
             }
         },error=>{
@@ -71,6 +74,8 @@ export class AssignmentDetailsComponent implements OnInit {
     this.studentAssignmentService.addRecord(record).subscribe(
       data=>{
           console.log("After adding ="+data);
+          alert("Submiison successfull");
+          this.router.navigate(['/student/assignments']);
       },error=>{
 
       }
@@ -123,7 +128,7 @@ export class AssignmentDetailsComponent implements OnInit {
           data => {
             this.currentAssignment = data;
             console.log(data);
-            this.getAssignnmentRecord(this.currentAssignment.title,localStorage.getItem('email'));
+            //this.getAssignnmentRecord(this.currentAssignment.title,localStorage.getItem('email'));
           },
           error => {
             console.log(error);
@@ -177,3 +182,4 @@ export class AssignmentDetailsComponent implements OnInit {
     }
 
 }
+

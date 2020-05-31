@@ -25,6 +25,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { CommonModule } from '@angular/common';
 import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.component';
+import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.compon
     AssignmentListComponent,
     AssignmentDetailsComponent,
     AdminNavBarComponent,
-    StudentNavBarComponent
+    StudentNavBarComponent,
+    SubmitAssignmentComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +67,7 @@ import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.compon
   { path: 'admin/assignments/add', component: AddAssignmentComponent ,canActivate:[AuthGuard] },
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
-  { path: 'student/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  }
+  { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  }
     ])
     
   ],
