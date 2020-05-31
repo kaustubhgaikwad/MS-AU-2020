@@ -41,6 +41,7 @@ export class AuthService {
           console.log("credentials matched")
           localStorage.setItem('token',token);
           localStorage.setItem('admin',this.User.admin);
+          localStorage.setItem('email',credentials.username);
           //this.adminAccess=this.User.admin;
           return true;
         }else{
@@ -56,6 +57,7 @@ export class AuthService {
    logout(){
      localStorage.removeItem('token');
      localStorage.removeItem('admin');
+     localStorage.removeItem('email');
      this.router.navigate(['/']);
 
    }
@@ -87,6 +89,8 @@ export class AuthService {
       this.http.get(`${baseUrl}/${profile.getEmail()}`).subscribe(
         data=>{
             this.User = data;
+            localStorage.setItem('admin',this.User.admin);
+            localStorage.setItem('email',this.User.username);
             this.adminAccess=this.User.admin
         },error=>{
           alert(error);

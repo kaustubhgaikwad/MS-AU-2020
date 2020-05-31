@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AssignmentService } from '../shared/assignment.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { StudentService } from '../services/student.service';
+import { StudentAssignmentService } from '../services/student-assignment.service';
 
 @Component({
   selector: 'assignment-details',
@@ -10,13 +13,52 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AssignmentDetailsComponent implements OnInit {
   currentAssignment = null;
   message = '';
+  UserData:any;
+
   constructor(private assignmentService: AssignmentService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public authService:AuthService,
+    private studentService:StudentService,
+    private studentAssignmentService:StudentAssignmentService) { }
 
     ngOnInit() {
       this.message = '';
       this.getAssignment(this.route.snapshot.paramMap.get('id'));
+    }
+    submitAssignment(assignmentRecord){
+      this.studentService.getStudent(localStorage.getItem('email')).subscribe(
+        data=>{
+           this.UserData = data;
+            const record={
+                  assignmentTitle: this.currentAssignment.title,
+                  assignmentDescription:this.currentAssignment.description,
+                  assignmentSolution:assignmentRecord.solution,
+                  studentName:this.UserData,
+                  studentEmail: localStorage.getItem('email'),
+              }
+              this.studentAssignmentService.addRecord(data).subscribe(
+                data=>{   
+                    alert("Assignment Submiited successfully");
+                    this.router.navigate(['/student/assignments']);
+                },error=>{
+                  alert(error);
+                  
+                }
+              )
+        },error=>{
+          alert(error);
+        }
+      )
+    //   const data={
+    //     assignmentTitle: this.currentAssignment.title,
+    //     assignmentDescription:this.currentAssignment.description,
+    //     assignmentSolution:assignmentRecord.solution,
+    //     "studentName": "Pedro",
+    //     studentEmail: localStorage.getItem('email'),
+    //     "id": 29
+    // }
+      //console.log("assignment record= "+assignmentRecord.solution)
     }
   
     getAssignment(id) {

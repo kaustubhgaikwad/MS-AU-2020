@@ -1,5 +1,5 @@
 <div *ngIf="authService.isLoggedIn()" ><div *ngIf="authService.isAdmin(); then admin else student"></div>
 <ng-template #admin><admin-nav-bar></admin-nav-bar></ng-template>
-<ng-template #student>student</ng-template>
+<ng-template #student><student-nav-bar></student-nav-bar></ng-template>
 </div>               
 <router-outlet></router-outlet>

@@ -24,6 +24,7 @@ import { AssignmentDetailsComponent } from './assignment-details/assignment-deta
 import { AgGridModule } from 'ag-grid-angular';
 import { CommonModule } from '@angular/common';
 import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
+import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
     AddAssignmentComponent,
     AssignmentListComponent,
     AssignmentDetailsComponent,
-    AdminNavBarComponent
+    AdminNavBarComponent,
+    StudentNavBarComponent
   ],
   imports: [
     CommonModule,
@@ -59,10 +61,11 @@ import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
      canActivate: [AuthGuard,StudentAuthGuard]
    },
    { path: 'no-access', component: NoAccessComponent },
-  { path: 'admin/assignments', component: AssignmentListComponent },
-  { path: 'admin/assignments/add', component: AddAssignmentComponent },
-  { path: 'admin/assignments/:id', component: AssignmentDetailsComponent },
-  
+  { path: 'admin/assignments', component: AssignmentListComponent,canActivate:[AuthGuard] },
+  { path: 'admin/assignments/add', component: AddAssignmentComponent ,canActivate:[AuthGuard] },
+  { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
+  { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
+  { path: 'student/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  }
     ])
     
   ],

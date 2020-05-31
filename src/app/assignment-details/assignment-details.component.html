@@ -1,7 +1,7 @@
 <!-- <admin-nav-bar></admin-nav-bar> -->
 <div *ngIf="currentAssignment" class="edit-form">
-    <h4>Tutorial</h4>
-    <form>
+    <h4>Assignment</h4>
+    <form  #f="ngForm">
       <div class="form-group">
         <label for="title">Title</label>
         <input
@@ -21,6 +21,20 @@
           [(ngModel)]="currentAssignment.description"
           name="description"
         />
+      </div>
+      <div class="form-group" *ngIf="!authService.isAdmin()">
+        <label for="solution">Solution</label>
+        <input
+          type="text"
+          class="form-control"
+          id="solution"
+          ngModel
+          name="solution"
+          required
+        />
+      </div>
+      <div *ngIf="!authService.isAdmin()">
+        <button type="submit" class="badge badge-success" (click)="submitAssignment(f.value)">Submit Assignment</button>
       </div>
   
       <!-- <div class="form-group">
@@ -43,12 +57,16 @@
     >
       Publish
     </button>-->
-  
-    <button class="badge badge-danger mr-2" (click)="deleteAssignment()">
+<!--   
+    <div *ngIf="!authService.isAdmin()">
+      <button type="submit" class="badge badge-success" (click)="submitAssignment(f.value)">Submit Assignment</button>
+    </div> -->
+                     
+    <button *ngIf="authService.isAdmin()" class="badge badge-danger mr-2" (click)="deleteAssignment()">
       Delete
     </button>
   
-    <button type="submit" class="badge badge-success" (click)="updateAssignment()">
+    <button *ngIf="authService.isAdmin()" type="submit" class="badge badge-success" (click)="updateAssignment()">
       Update
     </button>
     <p>{{ message }}</p>

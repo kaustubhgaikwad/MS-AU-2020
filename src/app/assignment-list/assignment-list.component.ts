@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {  ColDef,GridApi,ColumnApi  } from 'ag-grid-community'; 
 import { Router } from '@angular/router';
 import { AssignmentService } from '../shared/assignment.service';
+import { AuthService } from '../services/auth.service';
+
 @Component({
   selector: 'assignment-list',
   templateUrl: './assignment-list.component.html',
@@ -9,6 +11,8 @@ import { AssignmentService } from '../shared/assignment.service';
 })
 export class AssignmentListComponent implements OnInit {
 
+  isAdmin:boolean;
+  
   assignments: any;
   currentAssignment = null;
   currentIndex = -1;
@@ -20,6 +24,7 @@ export class AssignmentListComponent implements OnInit {
 
 
   constructor(
+    public authService:AuthService,
     private assignmentService: AssignmentService,
     private router:Router
               ) { 
@@ -27,6 +32,7 @@ export class AssignmentListComponent implements OnInit {
               }
 
               ngOnInit() {
+                this.isAdmin=this.authService.isAdmin()
                 this.retrieveAssignments();
               }
             
@@ -37,14 +43,24 @@ export class AssignmentListComponent implements OnInit {
             }
             
             editAssignment(){
-              if (this.api.getSelectedRows().length == 0) {  
-                alert("Please select a row for update");
+              if (this.api.getSelectedRows().length == 0) { 
+                if(this.isAdmin) 
+                alert("Please select a assignment for update");
+                else if(!this.isAdmin){
+                  alert("Please select a assignment for submission");
+                }
                 //this.toastr.error("error", "Please select a User for update");  
                 return;  
             }  
             var row = this.api.getSelectedRows();  
-            console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
-            this.router.navigate(['admin/assignments/'+row[0].id]);
+            if(this.isAdmin){
+              console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
+              this.router.navigate(['admin/assignments/'+row[0].id]);
+            }else if(!this.isAdmin){
+              console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
+              this.router.navigate(['student/assignments/'+row[0].id]);
+            }
+            
             // this.userService.updateUser(row[0]).subscribe(data => {  
             //     this.toastr.success("success", data);  
             //     this.ngOnInit();  

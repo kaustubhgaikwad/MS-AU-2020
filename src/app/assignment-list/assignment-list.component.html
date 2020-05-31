@@ -42,11 +42,14 @@
         </li>
       </ul> -->
   
-      <button class="m-3 btn btn-sm btn-success" routerLink="add">
+      <button *ngIf="isAdmin" class="m-3 btn btn-sm btn-success" routerLink="add">
         Add assignment
       </button>
-      <button class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
+      <button *ngIf="isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
         Edit
+      </button>
+      <button *ngIf="!isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
+        Submit
       </button>
     </div>
     <div class="col-md-6">
@@ -64,14 +67,21 @@
           {{ currentTutorial.published ? "Published" : "Pending" }}
         </div> -->
   
-        <a class="badge badge-warning" routerLink="admin/assignments/{{ currentAssignment.id }}">
+        <a *ngIf="isAdmin" class="badge badge-warning" routerLink="admin/assignments/{{ currentAssignment.id }}">
           Edit
+        </a>
+        <a *ngIf="!isAdmin" class="badge badge-warning" routerLink="student/assignments/{{ currentAssignment.id }}">
+          Submit
         </a>
       </div>
   
-      <div *ngIf="!currentAssignment">
+      <div *ngIf="isAdmin && !currentAssignment">
         <br />
         <p>Select an assignment if you want to update...</p>
+      </div>
+      <div *ngIf="!isAdmin && !currentAssignment">
+        <br />
+        <p>Select an assignment you want to submit...</p>
       </div>
     </div>
   </div>
