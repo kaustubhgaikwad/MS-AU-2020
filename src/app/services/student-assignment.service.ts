@@ -21,4 +21,10 @@ export class StudentAssignmentService {
   updateRecord(id,data){
     return this.http.put(baseUrl+'/'+id,data);
   }
+  getRecordByEmail(email){
+    return this.http.get(baseUrl+'/all'+'/'+email);
+  }
+  getAll(){
+    return this.http.get(baseUrl+'/all');
+  }
 }

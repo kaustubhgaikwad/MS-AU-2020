@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
 import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.component';
 import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
+import { StudentAssignmentSubmissionComponent } from './student-assignment-submission/student-assignment-submission.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment
     AssignmentDetailsComponent,
     AdminNavBarComponent,
     StudentNavBarComponent,
-    SubmitAssignmentComponent
+    SubmitAssignmentComponent,
+    StudentAssignmentSubmissionComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +69,10 @@ import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment
   { path: 'admin/assignments/add', component: AddAssignmentComponent ,canActivate:[AuthGuard] },
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
+  { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  }
+  
+  
     ])
     
   ],

@@ -41,7 +41,10 @@ export class AssignmentService {
   // }
 
   findByTitle(title) {
-    return this.http.get(`${baseUrl}?title=${title}`);
+    console.log("title=");
+    let response=this.http.get(baseUrl+'/title/'+title);
+    console.log("response="+response);
+    return response;
   }
 
 

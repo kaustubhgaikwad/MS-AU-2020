@@ -19,57 +19,13 @@
         </div>
       </div>
     </div>
-    <div *ngIf="showSubmission; then submissionList else assignmentList"></div>
-    <ng-template #submissionList>
-      <div class="col-md-6">
-        <h4>Assignment List</h4>
-        <ag-grid-angular 
-          style="width: 100%; height: 200px;" 
-          class="ag-theme-blue" 
-          (gridReady)="onGridReady($event)"  
-          [columnDefs]="submissionColumnDefs" 
-          [rowData]="submittedAssignments" 
-          rowSelection="single" 
-          pagination="true" 
-          paginationPageSize=5  
-        ></ag-grid-angular> 
-        <!-- <ul class="list-group">
-          <li
-            class="list-group-item"
-            *ngFor="let tutorial of tutorials; let i = index"
-            [class.active]="i == currentIndex"
-            (click)="setActiveTutorial(tutorial, i)"
-          >
-            {{ tutorial.title }}
-          </li>
-        </ul> -->
-    
-        <button *ngIf="isAdmin" class="m-3 btn btn-sm btn-success" routerLink="add">
-          Add assignment
-        </button>
-        <button *ngIf="isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
-          Edit
-        </button>
-        <button *ngIf="!isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
-          Submit
-        </button>
-        <button *ngIf="!isAdmin" class="m-3 btn btn-sm btn-primary" routerLink="submission">
-          See your submission
-        </button>
-        <button *ngIf="showSubmission" class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">
-          View Assignments
-        </button>
-      </div>
-  
-    </ng-template>
-    <ng-template #assignmentList>
     <div class="col-md-6">
       <h4>Assignment List</h4>
       <ag-grid-angular 
         style="width: 100%; height: 200px;" 
         class="ag-theme-blue" 
         (gridReady)="onGridReady($event)"  
-        [columnDefs]="assignmentColumnDefs" 
+        [columnDefs]="columnDefs" 
         [rowData]="assignments" 
         rowSelection="single" 
         pagination="true" 
@@ -95,22 +51,7 @@
       <button *ngIf="!isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
         Submit
       </button>
-      <button *ngIf="!isAdmin" class="m-3 btn btn-sm btn-primary" routerLink="submission">
-        See your submission
-      </button>
-      <button *ngIf="!showSubmission" class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">
-        View Submission
-      </button>
     </div>
-  </ng-template>
-
-    <!-- <div *ngIf="showSubmission; then submission-list else assignment-list"></div>
-    <ng-template #submission-list><admin-nav-bar></admin-nav-bar></ng-template>
-    <ng-template #assignment-list><student-nav-bar></student-nav-bar></ng-template>
-
-
-    <button class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">View Submission</button>
-    <button class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">View Submission</button> -->
     <div class="col-md-6">
       <div *ngIf="currentAssignment">
         <h4>Tutorial</h4>
@@ -132,7 +73,9 @@
         <a *ngIf="!isAdmin" class="badge badge-warning" routerLink="student/assignments/{{ currentAssignment.id }}">
           Submit
         </a>
-        
+        <a *ngIf="!isAdmin" class="badge badge-warning" routerLink="student/assignments/submission{{ currentAssignment.id }}">
+          See you submission
+        </a>
       </div>
   
       <div *ngIf="isAdmin && !currentAssignment">

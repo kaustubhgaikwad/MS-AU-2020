@@ -1,27 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import {  ColDef,GridApi,ColumnApi  } from 'ag-grid-community'; 
-import { Router } from '@angular/router';
-import { AssignmentService } from '../shared/assignment.service';
+import { ColDef, GridApi, ColumnApi } from 'ag-grid-community';
 import { AuthService } from '../services/auth.service';
+import { AssignmentService } from '../shared/assignment.service';
+import { Router } from '@angular/router';
 import { StudentAssignmentService } from '../services/student-assignment.service';
 
 @Component({
-  selector: 'assignment-list',
-  templateUrl: './assignment-list.component.html',
-  styleUrls: ['./assignment-list.component.css']
+  selector: 'app-student-assignment-submission',
+  templateUrl: './student-assignment-submission.component.html',
+  styleUrls: ['./student-assignment-submission.component.css']
 })
-export class AssignmentListComponent implements OnInit {
+export class StudentAssignmentSubmissionComponent implements OnInit  {
 
   isAdmin:boolean;
   
   assignments: any;
-  submittedAssignments:any;
   currentAssignment = null;
   currentIndex = -1;
-  showSubmission=false;
   title = '';
-  public assignmentColumnDefs: ColDef[]; 
-  public submissionColumnDefs:ColDef[]; 
+  public columnDefs: ColDef[];  
     // gridApi and columnApi  
   private api: GridApi;  
   private columnApi: ColumnApi;
@@ -33,25 +30,13 @@ export class AssignmentListComponent implements OnInit {
     private router:Router,
     private studentAssignmentService:StudentAssignmentService
               ) { 
-                this.assignmentColumnDefs = this.createAssignmentColumnDefs();
-                this.submissionColumnDefs = this.createSubmissionColumnDefs();
+                this.columnDefs = this.createColumnDefs();
               }
-
-              
 
               ngOnInit() {
                 this.isAdmin=this.authService.isAdmin()
-                this.retrieveAssignments();
-                this.retrieveAssignmentsRecords();
-              }
-              retrieveAssignmentsRecords(){
-                this.studentAssignmentService.getAll().subscribe(
-                  data=>{
-                      this.submittedAssignments=data;
-                  },error=>{
-                      console.log(error);
-                  }
-                )
+                this.getAllRecords();
+                //this.retrieveAssignments();
               }
             
               onGridReady(params): void {  
@@ -75,8 +60,18 @@ export class AssignmentListComponent implements OnInit {
               console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
               this.router.navigate(['admin/assignments/'+row[0].id]);
             }else if(!this.isAdmin){
-              console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
-              this.router.navigate(['student/assignments/'+row[0].id]);
+              console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].assignmentTitle,"Id="+row[0].id);
+              //this.
+              this.assignmentService.findByTitle(row[0].assignmentTitle).subscribe(
+                  data=>{
+                      this.currentAssignment= data;
+                      console.log("currentassignment found by title"+this.currentAssignment);
+                      this.router.navigate(['/student/assignments/'+this.currentAssignment.id]);
+                  },error=>{
+
+                  }  
+              )
+              //this.router.navigate(['student/assignments/'+row[0].id]);
             }
             
             // this.userService.updateUser(row[0]).subscribe(data => {  
@@ -85,58 +80,28 @@ export class AssignmentListComponent implements OnInit {
             // }); 
             }
             
-            private createAssignmentColumnDefs() {  
+            private createColumnDefs() {  
               return [{  
                   headerName: 'Assignment Title',  
-                  field: 'title',  
+                  field: 'assignmentTitle',  
                   filter: true,  
                   enableSorting: true,  
                   editable: true,  
                   sortable: true  
               }, {  
                   headerName: 'Description',  
-                  field: 'description',  
+                  field: 'assignmentDescription',  
                   filter: true,  
                   editable: true,  
                   sortable: true  
-              }]  
-            }
-
-            createSubmissionColumnDefs(){
-              return [{  
-                headerName: 'Assignment Title',  
-                field: 'assignmentTitle',  
-                filter: true,  
-                enableSorting: true,  
-                editable: true,  
-                sortable: true  
-            }, {  
-                headerName: 'Description',  
-                field: 'assignmentDescription',  
+              },
+              {  
+                headerName: 'Solution',  
+                field: 'assignmentSolution',  
                 filter: true,  
                 editable: true,  
                 sortable: true  
-            },
-            {  
-              headerName: 'StudentName',  
-              field: 'studentName',  
-              filter: true,  
-              editable: true,  
-              sortable: true  
-          },
-            {  
-              headerName: 'Email',  
-              field: 'studentEmail',  
-              filter: true,  
-              editable: true,  
-              sortable: true  
-          }, {  
-            headerName: 'Solution',  
-            field: 'assignmentSolution',  
-            filter: true,  
-            editable: true,  
-            sortable: true  
-        }]
+            }]  
             }
             
               retrieveAssignments() {
@@ -187,9 +152,19 @@ export class AssignmentListComponent implements OnInit {
                       console.log(error);
                     });
               }
-
-              changeShowStatus(){
-                this.showSubmission = !this.showSubmission;
+              getAllRecords(){
+                this.studentAssignmentService.getRecordByEmail(localStorage.getItem('email')).subscribe(
+                  data=>{
+                    
+                      this.assignments=data;
+                      console.log("records table data="+this.assignments)
+                  },error=>{
+                    console.log(error);
+                    alert(error);
+                  }
+                  
+                )
               }
 
 }
+
