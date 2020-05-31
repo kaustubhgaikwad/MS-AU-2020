@@ -35,6 +35,8 @@ export class AuthService {
       data=>{
         this.User=data
         console.log("hello")
+        if(!data)return false;
+        console.log(data);
         if(credentials.password === this.User.password){
           console.log("credentials matched")
           localStorage.setItem('token',token);

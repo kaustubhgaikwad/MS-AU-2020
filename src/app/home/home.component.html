@@ -9,7 +9,6 @@
   <li *ngIf="authService.isLoggedIn()" ><button (click)="authService.logout()">Logout</button></li>
 </ul> -->
 
-
 <!DOCTYPE html>
 <html lang="de" class="scroll">
     <head>
@@ -28,7 +27,13 @@
             <nav>
                 <ul>
                   
-                  <li *ngIf="!authService.isLoggedIn()"><a routerLink="/admin">Dashboard</a></li>
+                  <li *ngIf="authService.isLoggedIn()">
+                    
+                    <div *ngIf="authService.isAdmin(); then admin else student"></div>
+                    <ng-template #admin><a routerLink="/admin">Dashboard</a>.</ng-template>
+                    <ng-template #student><a routerLink="/student">Dashboard</a></ng-template>
+                       
+                    </li>
                   <li *ngIf="!authService.isLoggedIn()" ><a routerLink="/login">Login</a></li>
                   <li *ngIf="authService.isLoggedIn()" ><a (click)="authService.logout()">Logout</a></li>
                     <!-- <li><a href="#one">one</a></li>

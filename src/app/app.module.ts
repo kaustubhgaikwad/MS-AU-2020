@@ -18,20 +18,33 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { StudentAuthGuard } from './services/student-auth-guard.service';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import { AddAssignmentComponent } from './add-assignment/add-assignment.component';
+import { AssignmentListComponent } from './assignment-list/assignment-list.component';
+import { AssignmentDetailsComponent } from './assignment-details/assignment-details.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { CommonModule } from '@angular/common';
+import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NoAccessComponent
+    NoAccessComponent,
+    AdminComponent,
+    AddAssignmentComponent,
+    AssignmentListComponent,
+    AssignmentDetailsComponent,
+    AdminNavBarComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    RouterModule,
+    AgGridModule.withComponents([]),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
@@ -45,7 +58,11 @@ import { HttpClientModule } from '@angular/common/http';
      component: StudentComponent ,
      canActivate: [AuthGuard,StudentAuthGuard]
    },
-   { path: 'no-access', component: NoAccessComponent }
+   { path: 'no-access', component: NoAccessComponent },
+  { path: 'admin/assignments', component: AssignmentListComponent },
+  { path: 'admin/assignments/add', component: AddAssignmentComponent },
+  { path: 'admin/assignments/:id', component: AssignmentDetailsComponent },
+  
     ])
     
   ],
@@ -59,6 +76,7 @@ import { HttpClientModule } from '@angular/common/http';
     // MockBackend,
     //BaseRequestOptions
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[RouterModule]
 })
 export class AppModule { }
