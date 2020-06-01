@@ -44,12 +44,7 @@
           </li>
         </ul> -->
     
-        <button *ngIf="isAdmin" class="m-3 btn btn-sm btn-success" routerLink="add">
-          Add assignment
-        </button>
-        <button *ngIf="isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
-          Edit
-        </button>
+        
         <button *ngIf="!isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
           Submit
         </button>
@@ -98,7 +93,7 @@
       <button *ngIf="!isAdmin" class="m-3 btn btn-sm btn-primary" routerLink="submission">
         See your submission
       </button>
-      <button *ngIf="!showSubmission" class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">
+      <button *ngIf="isAdmin && !showSubmission" class="m-3 btn btn-sm btn-primary" (click)="changeShowStatus()">
         View Submission
       </button>
     </div>

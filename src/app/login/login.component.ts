@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import {FormGroup,FormControl, Validators} from '@angular/forms';
 import { UserNameValidators } from './username.validators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private route:ActivatedRoute, 
-    private authService: AuthService ) { }
+    private authService: AuthService,
+    private ngZone:NgZone ) { }
 
     auth2:any;
     @ViewChild('loginRef', {static: true }) loginElement: ElementRef;
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
   prepareLoginButton() {
     console.log("Inside prepareLoginButton()")
     this.auth2.attachClickHandler(this.loginElement.nativeElement, {},
-      (googleUser) => {
+      (googleUser) => this.ngZone.run(()=>{
         console.log("porfile");
         let profile = googleUser.getBasicProfile();
         this.authService.googleSignIn(profile,googleUser);
@@ -73,12 +74,13 @@ export class LoginComponent implements OnInit {
         if(this.isAdmin)
           this.router.navigate(['/admin']);
           else{
+            console.log("student signed with google");
             this.router.navigate(['/student']);
           }
         //YOUR CODE HERE
       }, (error) => {
         alert(JSON.stringify(error, undefined, 2));
-      });
+      }));
  
   }
 
@@ -90,6 +92,7 @@ export class LoginComponent implements OnInit {
           cookiepolicy: 'single_host_origin',
           scope: 'profile email'
         });
+        //this.ngZone.run(()=>this.prepareLoginButton());
         this.prepareLoginButton();
       });
     }

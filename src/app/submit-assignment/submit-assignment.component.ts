@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { StudentService } from '../services/student.service';
 import { StudentAssignmentService } from '../services/student-assignment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-submit-assignment',
@@ -24,7 +25,8 @@ export class SubmitAssignmentComponent implements OnInit {
     private router: Router,
     public authService:AuthService,
     private studentService:StudentService,
-    private studentAssignmentService:StudentAssignmentService) { }
+    private studentAssignmentService:StudentAssignmentService,
+    private toastr: ToastrService) { }
 
     ngOnInit() {
       this.message = '';
@@ -55,7 +57,9 @@ export class SubmitAssignmentComponent implements OnInit {
       this.studentAssignmentService.updateRecord(this.SubmittedAssignment.id,this.SubmittedAssignment).subscribe(
       data=>{
             this.message = 'Your assignment submission was updated successfully!';
-            alert("Assignment submission updated ");
+            this.toastr.success("Updated","Assignment");
+            //.clear("Updated","Assignment Submission");
+            //alert("Assignment submission updated ");
             this.router.navigate(['/student/assignments']);
       },error=>{
         alert(error);
@@ -74,7 +78,8 @@ export class SubmitAssignmentComponent implements OnInit {
     this.studentAssignmentService.addRecord(record).subscribe(
       data=>{
           console.log("After adding ="+data);
-          alert("Submiison successfull");
+          this.toastr.success("Done", "Assignment Submission");
+          //alert("Submiison successfull");
           this.router.navigate(['/student/assignments']);
       },error=>{
 

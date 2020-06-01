@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { StudentService } from '../services/student.service';
 import { StudentAssignmentService } from '../services/student-assignment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'assignment-details',
@@ -20,6 +21,7 @@ export class AssignmentDetailsComponent implements OnInit {
   SubmittedAssignment=null;
 
   constructor(private assignmentService: AssignmentService,
+    private toastr:ToastrService,
     private route: ActivatedRoute,
     private router: Router,
     public authService:AuthService,
@@ -43,7 +45,9 @@ export class AssignmentDetailsComponent implements OnInit {
               this.isSubmitted=false;
             }
         },error=>{
-          alert(error);
+          console.log(error);
+          
+          //alert(error);
         }
         
       )
@@ -52,7 +56,8 @@ export class AssignmentDetailsComponent implements OnInit {
       this.studentAssignmentService.updateRecord(this.SubmittedAssignment.id,this.SubmittedAssignment).subscribe(
       data=>{
             this.message = 'Your assignment submission was updated successfully!';
-            alert("Assignment submission updated ");
+            this.toastr.success("Assignment Updated");
+            //alert("Assignment submission updated ");
             this.router.navigate(['/student/assignments']);
       },error=>{
         alert(error);
@@ -154,7 +159,8 @@ export class AssignmentDetailsComponent implements OnInit {
           response => {
             console.log(response);
             this.message = 'The tutorial was updated successfully!';
-            alert("Assignment updated ");
+            this.toastr.success("Assignment Updated");
+            //alert("Assignment updated ");
             this.router.navigate(['/admin/assignments']);
           },
           error => {
@@ -168,6 +174,7 @@ export class AssignmentDetailsComponent implements OnInit {
           response => {
             console.log("no error");
             console.log(response);
+            this.toastr.error("Assignment Deleted");
             this.router.navigate(['admin/assignments']);
           },
           error => {

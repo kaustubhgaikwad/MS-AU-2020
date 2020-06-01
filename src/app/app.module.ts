@@ -27,6 +27,7 @@ import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.component';
 import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
 import { StudentAssignmentSubmissionComponent } from './student-assignment-submission/student-assignment-submission.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +52,7 @@ import { StudentAssignmentSubmissionComponent } from './student-assignment-submi
     HttpClientModule,
     RouterModule,
     AgGridModule.withComponents([]),
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
