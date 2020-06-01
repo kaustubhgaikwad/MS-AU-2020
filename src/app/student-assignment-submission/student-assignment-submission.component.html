@@ -1,7 +1,7 @@
 <!-- <admin-nav-bar></admin-nav-bar> -->
 <div class="list row">
     <div class="col-md-8">
-      <div class="input-group mb-3">
+      <!-- <div class="input-group mb-3">
         <input
           type="text"
           class="form-control"
@@ -17,13 +17,17 @@
             Search
           </button>
         </div>
-      </div>
+      </div> -->
     </div>
-    <div class="col-md-6">
+    <div class="col-md-8" style="position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);">
       <h4>Assignment List</h4>
       <ag-grid-angular 
-        style="width: 100%; height: 200px;" 
-        class="ag-theme-blue" 
+        style="width: 100%; height: 300px;" 
+        class="ag-theme-alpine" 
         (gridReady)="onGridReady($event)"  
         [columnDefs]="columnDefs" 
         [rowData]="assignments" 
@@ -48,9 +52,10 @@
       <button *ngIf="isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
         Edit
       </button>
-      <button *ngIf="!isAdmin"  class="m-3 btn btn-sm btn-primary" (click)="editAssignment()">
-        Submit
+      <button *ngIf="!isAdmin" rounded="true"  class="m-3 btn btn-sm btn-warning" (click)="editAssignment()">
+        Edit Submit
       </button>
+      
     </div>
     <div class="col-md-6">
       <div *ngIf="currentAssignment">
@@ -70,9 +75,11 @@
         <a *ngIf="isAdmin" class="badge badge-warning" routerLink="admin/assignments/{{ currentAssignment.id }}">
           Edit
         </a>
-        <a *ngIf="!isAdmin" class="badge badge-warning" routerLink="student/assignments/{{ currentAssignment.id }}">
-          Submit
-        </a>
+        <button mdbBtn type="button" color="success" rounded="true" mdbWavesEffect>
+          <a *ngIf="!isAdmin" routerLink="student/assignments/{{ currentAssignment.id }}">
+            Submit Assignment
+          </a>
+        </button>
         <a *ngIf="!isAdmin" class="badge badge-warning" routerLink="student/assignments/submission{{ currentAssignment.id }}">
           See you submission
         </a>
