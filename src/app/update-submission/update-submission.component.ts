@@ -5,14 +5,13 @@ import { AuthService } from '../services/auth.service';
 import { StudentService } from '../services/student.service';
 import { StudentAssignmentService } from '../services/student-assignment.service';
 import { ToastrService } from 'ngx-toastr';
-import { sanitizeIdentifier } from '@angular/compiler';
 
 @Component({
-  selector: 'app-submit-assignment',
-  templateUrl: './submit-assignment.component.html',
-  styleUrls: ['./submit-assignment.component.css']
+  selector: 'app-update-submission',
+  templateUrl: './update-submission.component.html',
+  styleUrls: ['./update-submission.component.css']
 })
-export class SubmitAssignmentComponent implements OnInit {
+export class UpdateSubmissionComponent implements OnInit  {
   currentAssignment = null;
   currentSolution= "  ";
   message = '';
@@ -32,12 +31,12 @@ export class SubmitAssignmentComponent implements OnInit {
     ngOnInit() {
       this.message = '';
       console.log("Submitting again");
-      this.getAssignment(this.route.snapshot.paramMap.get('id'));
-      this.getAssignnmentRecord(this.route.snapshot.paramMap.get('id'),localStorage.getItem('email'));
+      //this.getAssignment(this.route.snapshot.paramMap.get('id'));
+      this.getAssignnmentRecord(this.route.snapshot.paramMap.get('id'));
     }
 
-    getAssignnmentRecord(id,email){
-      this.studentAssignmentService.getRecord(id,email).subscribe(
+    getAssignnmentRecord(id,){
+      this.studentAssignmentService.getRecordById(id).subscribe(
         data=>{
             if(data){
               this.SubmittedAssignment=data;
@@ -200,4 +199,5 @@ export class SubmitAssignmentComponent implements OnInit {
     }
 
 }
+
 

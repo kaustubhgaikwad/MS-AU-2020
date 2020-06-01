@@ -60,17 +60,18 @@ export class StudentAssignmentSubmissionComponent implements OnInit  {
               console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].description,"Id="+row[0].id);
               this.router.navigate(['admin/assignments/'+row[0].id]);
             }else if(!this.isAdmin){
-              console.log("Row selected:"+"Title="+ row[0].title+"Description="+row[0].assignmentTitle,"Id="+row[0].id);
+              console.log("Row selected:"+"Title="+row[0].assignmentTitle+"Description="+row[0].assignmentDescription,"Id="+row[0].id);
               //this.
-              this.assignmentService.findByTitle(row[0].assignmentTitle).subscribe(
-                  data=>{
-                      this.currentAssignment= data;
-                      console.log("currentassignment found by title"+this.currentAssignment);
-                      this.router.navigate(['/student/assignments/'+this.currentAssignment.id]);
-                  },error=>{
+              this.router.navigate(['/student/update-assignments/'+row[0].id]);
+              // this.assignmentService.findByTitle(row[0].assignmentTitle).subscribe(
+              //     data=>{
+              //         this.currentAssignment= data;
+              //         console.log("currentassignment found by title"+this.currentAssignment);
+              //         this.router.navigate(['/student/assignments/'+this.currentAssignment.id]);
+              //     },error=>{
 
-                  }  
-              )
+              //     }  
+              // )
               //this.router.navigate(['student/assignments/'+row[0].id]);
             }
             
@@ -153,6 +154,7 @@ export class StudentAssignmentSubmissionComponent implements OnInit  {
                     });
               }
               getAllRecords(){
+                console.log("Inside funciton for getting all record submiitted by a student");
                 this.studentAssignmentService.getRecordByEmail(localStorage.getItem('email')).subscribe(
                   data=>{
                     

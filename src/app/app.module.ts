@@ -34,6 +34,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { UpdateSubmissionComponent } from './update-submission/update-submission.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {MatListModule} from '@angular/material/list';
     StudentComponent,
     StudentNavBarComponent,
     SubmitAssignmentComponent,
-    StudentAssignmentSubmissionComponent
+    StudentAssignmentSubmissionComponent,
+    UpdateSubmissionComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,8 @@ import {MatListModule} from '@angular/material/list';
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
-  { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  }
+  { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
+  { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  }
   
   
     ]),
