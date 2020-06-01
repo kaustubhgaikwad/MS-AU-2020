@@ -28,6 +28,13 @@ import { StudentNavBarComponent } from './student-nav-bar/student-nav-bar.compon
 import { SubmitAssignmentComponent } from './submit-assignment/submit-assignment.component';
 import { StudentAssignmentSubmissionComponent } from './student-assignment-submission/student-assignment-submission.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from  '@angular/material/button';
+import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     AssignmentListComponent,
     AssignmentDetailsComponent,
     AdminNavBarComponent,
+    StudentComponent,
     StudentNavBarComponent,
     SubmitAssignmentComponent,
     StudentAssignmentSubmissionComponent
@@ -51,10 +59,16 @@ import { ToastrModule } from 'ngx-toastr';
     HttpModule,
     HttpClientModule,
     RouterModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
     AgGridModule.withComponents([]),
     ToastrModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
+      { path: '', redirectTo:'home' ,pathMatch: 'full'},
       { path: 'login', component: LoginComponent },
       {
         path: 'admin',
@@ -75,7 +89,8 @@ import { ToastrModule } from 'ngx-toastr';
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  }
   
   
-    ])
+    ]),
+    BrowserAnimationsModule
     
   ],
   providers: [  

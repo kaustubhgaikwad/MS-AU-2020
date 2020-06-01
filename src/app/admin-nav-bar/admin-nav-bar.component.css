@@ -1,0 +1,11 @@
+/* // hard coded for this demo only. */
+
+/* To enable hover:rounded class utility, just add the 'hover' pseudo-class variants in borderRadius utility in your tailwind.config.js
+variants: {
+  ...
+  borderRadius: ['responsive', 'hover'],
+} */
+
+.hover\:rounded-md:hover {
+  border-radius: .375rem;
+}
