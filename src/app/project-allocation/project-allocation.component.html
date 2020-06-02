@@ -1,0 +1,94 @@
+<div *ngIf="displayStudentList" class="col-md-8" style="position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);">
+      <h4>Student List</h4>
+      <ag-grid-angular 
+        style="width: 100%; height: 300px;" 
+        class="ag-theme-alpine" 
+        (gridReady)="onGridReady($event)"  
+        [columnDefs]="columnDefs" 
+        [rowData]="studentData" 
+        rowSelection="single" 
+        pagination="true" 
+        paginationPageSize=5  
+      ></ag-grid-angular>
+
+      <button  class="m-3 btn btn-sm btn-info" (click)="showStudentDetails()">
+        Project Details
+      </button>  
+</div>
+
+<div *ngIf="!displayStudentList">
+
+    <!-- <admin-nav-bar></admin-nav-bar> -->
+<div  class="edit-form" class="custom-form-class">
+    <h4>Project Details</h4>
+    <form  #f="ngForm">
+      <div class="form-group">
+        <label for="name">Student Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentStudent.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group" *ngIf="isProjectAllocated">
+        <label for="title">Project Title</label>
+        <!-- <div *ngIf="projectData!=null" > -->
+            <input
+            type="text"
+            class="form-control"
+            id="title"
+            [(ngModel)]="currentProject.projectTitle"
+            name="title"
+            />  
+      </div>
+      <div class="form-group" *ngIf="!isProjectAllocated">
+        <label for="title">Project Title</label>
+        <!-- <div *ngIf="projectData!=null" > -->
+            <input
+            type="text"
+            class="form-control"
+            id="title"
+            ngModel
+            name="title"
+            />  
+      </div>
+      <div class="form-group" *ngIf="isProjectAllocated" >
+        <label for="description">Project Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentProject.projectDescription"
+          name="decription"
+        />
+      </div>
+      <div class="form-group" *ngIf="!isProjectAllocated" >
+        <label for="description">Project Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          ngModel
+          name="description"
+        />
+      </div>
+      <button  *ngIf="!isProjectAllocated" class="m-3 btn btn-sm btn-primary" (click)="saveProject(f.value)">
+        Allocate Project
+      </button>
+      <button  *ngIf="isProjectAllocated" class="m-3 btn btn-sm btn-warning" (click)="updateProject()">
+        Update Changes
+      </button>
+    </form>
+    <!-- <button  class="m-3 btn btn-sm btn-primary" (click)="saveProject()">
+        Save Changes
+      </button>
+     -->
+  </div>
+
+</div>

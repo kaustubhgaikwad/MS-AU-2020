@@ -13,4 +13,7 @@ export class StudentService {
   getStudent(email){
     return this.http.get(baseUrl+'/email/'+email);
   }
+  getAll(){
+    return this.http.get(baseUrl+'/all');
+  }
 }

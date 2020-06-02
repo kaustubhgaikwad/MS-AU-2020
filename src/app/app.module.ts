@@ -35,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { UpdateSubmissionComponent } from './update-submission/update-submission.component';
+import { ProjectAllocationComponent } from './project-allocation/project-allocation.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { UpdateSubmissionComponent } from './update-submission/update-submission
     StudentNavBarComponent,
     SubmitAssignmentComponent,
     StudentAssignmentSubmissionComponent,
-    UpdateSubmissionComponent
+    UpdateSubmissionComponent,
+    ProjectAllocationComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +88,7 @@ import { UpdateSubmissionComponent } from './update-submission/update-submission
   { path: 'admin/assignments', component: AssignmentListComponent,canActivate:[AuthGuard] },
   { path: 'admin/assignments/add', component: AddAssignmentComponent ,canActivate:[AuthGuard] },
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
+  { path: 'admin/projects', component: ProjectAllocationComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
@@ -94,7 +97,8 @@ import { UpdateSubmissionComponent } from './update-submission/update-submission
   
   
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+   // MDBBootstrapModule.forRoot()
     
   ],
   providers: [  
