@@ -11,6 +11,7 @@ export class ProjectService {
   constructor(private http:HttpClient) { }
 
   getByStudentId(id){
+    console.log("Id passes to backend ="+id);
     return this.http.get(baseUrl+'/'+id);
   }
   add(data){

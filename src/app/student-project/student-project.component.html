@@ -1,0 +1,75 @@
+
+
+<div *ngIf="!projectAllocated">
+    You have not yet been alloacted a project
+</div>
+<div *ngIf=projectAllocated>
+    <!-- <progress-bar [progress]="75" [color]="'#488aff'">
+    </progress-bar>
+ -->
+
+     <!-- <progress-bar [progress]=progressStats [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+    </progress-bar>  -->
+
+    <div  class="edit-form" class="custom-form-class">
+        <h4>Project Details</h4>
+        <form  #f="ngForm">
+          <div class="form-group">
+            <label for="name">Student Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              [(ngModel)]="currentProject.studentName"
+              name="name"
+            />
+          </div>
+          <div class="form-group" >
+            <label for="title">Project Title</label>
+            <!-- <div *ngIf="projectData!=null" > -->
+                <input
+                type="text"
+                class="form-control"
+                id="title"
+                [(ngModel)]="currentProject.projectTitle"
+                name="title"
+                />  
+          </div>
+          <div class="form-group">
+            <label for="description">Project Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              [(ngModel)]="currentProject.projectDescription"
+              name="decription"
+            />
+          </div>
+          
+          <div class="form-group">
+            <label for="githubLink">Github Link to Project</label>
+            <input
+              type="text"
+              class="form-control"
+              id="githubLink"
+              [(ngModel)]="currentProject.githubLink"
+              name="githubLink"
+            />
+          </div>
+          
+          <!-- <button  *ngIf="!isProjectAllocated" class="m-3 btn btn-sm btn-primary" (click)="saveProject(f.value)">
+            Allocate Project
+          </button> -->
+          <button  *ngIf="projectAllocated" class="m-3 btn btn-sm btn-warning" (click)="updateProject()">
+            Update Changes
+          </button>
+        </form>
+        <!-- <button  class="m-3 btn btn-sm btn-primary" (click)="saveProject()">
+            Save Changes
+          </button>
+         -->
+      </div>
+    
+
+
+</div>

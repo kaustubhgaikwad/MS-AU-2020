@@ -16,7 +16,7 @@ import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { StudentAuthGuard } from './services/student-auth-guard.service';
-
+import {ProgressBarModule} from "angular-progress-bar"
 import { HttpClientModule } from '@angular/common/http';
 import { AddAssignmentComponent } from './add-assignment/add-assignment.component';
 import { AssignmentListComponent } from './assignment-list/assignment-list.component';
@@ -36,6 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { UpdateSubmissionComponent } from './update-submission/update-submission.component';
 import { ProjectAllocationComponent } from './project-allocation/project-allocation.component';
+import { StudentProjectComponent } from './student-project/student-project.component';
 
 @NgModule({
   declarations: [
@@ -53,9 +54,11 @@ import { ProjectAllocationComponent } from './project-allocation/project-allocat
     SubmitAssignmentComponent,
     StudentAssignmentSubmissionComponent,
     UpdateSubmissionComponent,
-    ProjectAllocationComponent
+    ProjectAllocationComponent,
+    StudentProjectComponent
   ],
   imports: [
+    ProgressBarModule,
     CommonModule,
     BrowserModule,
     FormsModule,
@@ -90,6 +93,7 @@ import { ProjectAllocationComponent } from './project-allocation/project-allocat
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
   { path: 'admin/projects', component: ProjectAllocationComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
+  { path: 'student/project', component: StudentProjectComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
   { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  },

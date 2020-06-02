@@ -17,6 +17,7 @@ export class StudentNavBarComponent implements OnInit {
     this.studentService.getStudent(localStorage.getItem('email')).subscribe(
       data=>{
         this.student = data;
+        localStorage.setItem('studentId',this.student.id);
       },error=>{
         
       }

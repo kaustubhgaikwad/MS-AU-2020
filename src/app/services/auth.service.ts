@@ -42,6 +42,7 @@ export class AuthService {
           localStorage.setItem('token',token);
           localStorage.setItem('admin',this.User.admin);
           localStorage.setItem('email',credentials.username);
+          //localStorage.setItem('id',this.User.id);
           //this.adminAccess=this.User.admin;
           return true;
         }else{
@@ -55,9 +56,13 @@ export class AuthService {
   }
 
    logout(){
+     if(localStorage.getItem('admin')==='false'){
+      localStorage.removeItem('studentId');
+     }
      localStorage.removeItem('token');
      localStorage.removeItem('admin');
      localStorage.removeItem('email');
+     //localStorage.removeItem('id');
      this.router.navigate(['/']);
 
    }
