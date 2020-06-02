@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AssignmentService } from '../shared/assignment.service';
 import { AuthService } from '../services/auth.service';
 import { StudentAssignmentService } from '../services/student-assignment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'assignment-list',
@@ -31,7 +32,8 @@ export class AssignmentListComponent implements OnInit {
     public authService:AuthService,
     private assignmentService: AssignmentService,
     private router:Router,
-    private studentAssignmentService:StudentAssignmentService
+    private studentAssignmentService:StudentAssignmentService,
+    private toastr:ToastrService
               ) { 
                 this.assignmentColumnDefs = this.createAssignmentColumnDefs();
                 this.submissionColumnDefs = this.createSubmissionColumnDefs();
@@ -58,6 +60,24 @@ export class AssignmentListComponent implements OnInit {
                 this.api = params.api;  
                 this.columnApi = params.columnApi;  
                 this.api.sizeColumnsToFit();  
+            }
+
+            evaluteAssignment(){
+                if (this.api.getSelectedRows().length == 0) { 
+                  if(this.isAdmin) 
+                  this.toastr.error("error", "Please select a User for update");
+                  //alert("Please select an assignment for evaluation for update");
+                  else if(!this.isAdmin){
+                    alert("Please select a assignment for submission");
+                  }
+                  //this.toastr.error("error", "Please select a User for update");  
+                  return;  
+              }  
+              var row = this.api.getSelectedRows();  
+              if(this.isAdmin){
+                //console.log("Marks entered="+row[0].score);
+                this.router.navigate(['admin/update-assignments/'+row[0].id]);
+              }
             }
             
             editAssignment(){
@@ -136,7 +156,14 @@ export class AssignmentListComponent implements OnInit {
             filter: true,  
             editable: true,  
             sortable: true  
-        }]
+        },
+        {  
+          headerName: 'Marks',  
+          field: 'score',  
+          filter: true,    
+          sortable: true  
+      }
+      ]
             }
             
               retrieveAssignments() {

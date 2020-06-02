@@ -89,7 +89,8 @@ import { UpdateSubmissionComponent } from './update-submission/update-submission
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
-  { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  }
+  { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  },
+  { path: 'admin/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  }
   
   
     ]),

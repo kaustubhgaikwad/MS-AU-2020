@@ -102,7 +102,13 @@ export class StudentAssignmentSubmissionComponent implements OnInit  {
                 filter: true,  
                 editable: true,  
                 sortable: true  
-            }]  
+            },
+            {  
+              headerName: 'Marks',  
+              field: 'score',  
+              filter: true,   
+              sortable: true  
+          }]  
             }
             
               retrieveAssignments() {

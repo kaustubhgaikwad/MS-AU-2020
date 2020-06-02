@@ -43,7 +43,11 @@ export class UpdateSubmissionComponent implements OnInit  {
               this.isSubmitted=true;
               this.currentSolution=this.SubmittedAssignment.solution
               console.log("sol="+this.SubmittedAssignment.solution)
+              if(this.SubmittedAssignment.score>0){
+                this.message="Your submission has been evaluted ,you cannot edit it"
+              }else{
               this.message="You have already submitted this assignment, you can still update it"
+              }
             }else{
               console.log("else");
               this.isSubmitted=false;
@@ -67,6 +71,23 @@ export class UpdateSubmissionComponent implements OnInit  {
       }
     )
     }
+
+    evaluteAssignment(){
+      console.log("Marks entered ="+this.SubmittedAssignment.score);
+      this.studentAssignmentService.updateRecord(this.SubmittedAssignment.id,this.SubmittedAssignment).subscribe(
+      data=>{
+            this.message = 'Assignment Evalution Done!';
+            this.toastr.success(" Done!","Assignment Evalution");
+            //.clear("Updated","Assignment Submission");
+            //alert("Assignment submission updated ");
+            this.router.navigate(["/admin/assignments"]);
+      },error=>{
+        alert(error);
+      }
+    )
+    }
+
+    
 
     submitAssignment(assignmentRecord){
     //   const record={
