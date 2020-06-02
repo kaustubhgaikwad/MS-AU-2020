@@ -1,9 +1,159 @@
-
-
 <div *ngIf="!projectAllocated">
     You have not yet been alloacted a project
 </div>
 <div *ngIf=projectAllocated>
+  
+  <div *ngIf=showStatus >
+    <div style="display: inline-block;" >
+      <h2>Your Current Project Status</h2>
+    <ngx-charts-pie-chart
+      [view]="[500, 300]"
+      [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+      [results]="completionStatus"
+      [legend]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [legendPosition] = "'bottom'"
+      [legendTitle]="'Completion Status'"
+      [labelFormatting]="pieChartLabelCompletion.bind(this, completionStatus)"
+      [animations]="false">
+    </ngx-charts-pie-chart>
+    </div>
+    <div style="display: inline-block;" >
+    <ngx-charts-pie-chart
+      [view]="[500, 300]"
+      [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+      [results]="testCoverage"
+      [legend]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [legendPosition] = "'bottom'"
+      [legendTitle]="'Test Coverage'"
+      [labelFormatting]="pieChartLabelTest.bind(this, testCoverage)"
+      [animations]="false">
+    </ngx-charts-pie-chart>
+    </div>
+    <div  class="project-form-class">
+
+      <form  #f="ngForm">
+        <div class="form-group">
+          <label for="name">Project Title</label>
+          <br>
+          {{currentProject.projectTitle}}
+        </div>
+        <div class="form-group" >
+          <label for="title">Project Title</label>
+          <br>
+          {{currentProject.projectDescription}}
+        </div>
+        <div class="form-group" >
+          <label for="title">Github Link</label>
+          <br>
+          {{currentProject.githubLink}}
+        </div>
+        </form>
+      
+    </div>
+    
+    <button class="m-3 btn btn-sm btn-warning" (click)="changeShowStatus()">
+      Edit
+    </button>  
+  </div>
+
+  <div *ngIf="!showStatus" >
+    <div  class="edit-form" class="edit-form-class">
+      <h4>Project Details</h4>
+      <form  #f="ngForm">
+        <div class="form-group" style="display: inline-block;" >
+          <label for="name">Student Name</label>
+          <input
+          readonly
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="currentProject.studentName"
+            name="name"
+          />
+        </div>
+        
+        <div class="form-group" style="display: inline-block;margin-left: 10px;">
+          <label for="title">Project Title</label>
+          <!-- <div *ngIf="projectData!=null" > -->
+              <input
+              type="text"
+              class="form-control"
+              id="title"
+              [(ngModel)]="currentProject.projectTitle"
+              name="title"
+              readonly
+              />  
+        </div>
+        <div class="form-group" style="display: inline-block; margin-left: 10px;" >
+          <label for="description">Project Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="currentProject.projectDescription"
+            name="decription"
+            readonly
+          />
+        </div>
+        
+        <div class="form-group" style="display: inline-block;margin-left: 10px;" >
+          <label for="githubLink">Github Link to Project</label>
+          <input
+            type="text"
+            class="form-control"
+            id="githubLink"
+            [(ngModel)]="currentProject.githubLink"
+            name="githubLink"
+          />
+        </div>
+
+        <div class="form-group"style="display: inline-block;margin-left: 10px;" >
+          <label for="completionPercentage">Completion Percentage</label>
+          <input
+            type="number"
+            min=0
+            max=100
+            class="form-control"
+            id="completionPercentage"
+            [(ngModel)]="currentProject.completionPercentage"
+            name="completionPercentage"
+          />
+        </div>
+        <div class="form-group " style="display: inline-block;margin-left: 10px;">
+          <label for="testingCoverage">Test Coverage</label>
+          <input
+            type="number"
+            min=0
+            max=100
+            class="form-control"
+            id="testingCoverage"
+            [(ngModel)]="currentProject.testingCoverage"
+            name="testingCoverage"
+          />
+        </div>
+        
+        <!-- <button  *ngIf="!isProjectAllocated" class="m-3 btn btn-sm btn-primary" (click)="saveProject(f.value)">
+          Allocate Project
+        </button> -->
+        <button  *ngIf="projectAllocated" class="m-3 btn btn-sm btn-warning" (click)="updateProject()">
+          Update Changes
+        </button>
+        <button class="m-3 btn btn-sm btn-info" (click)="changeShowStatus()">
+          View Stats
+        </button>
+      </form>
+      <!-- <button  class="m-3 btn btn-sm btn-primary" (click)="saveProject()">
+          Save Changes
+        </button>
+       -->
+    </div>
+    
+  
+  </div>
     <!-- <progress-bar [progress]="75" [color]="'#488aff'">
     </progress-bar>
  -->
@@ -11,65 +161,7 @@
      <!-- <progress-bar [progress]=progressStats [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
     </progress-bar>  -->
 
-    <div  class="edit-form" class="custom-form-class">
-        <h4>Project Details</h4>
-        <form  #f="ngForm">
-          <div class="form-group">
-            <label for="name">Student Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              [(ngModel)]="currentProject.studentName"
-              name="name"
-            />
-          </div>
-          <div class="form-group" >
-            <label for="title">Project Title</label>
-            <!-- <div *ngIf="projectData!=null" > -->
-                <input
-                type="text"
-                class="form-control"
-                id="title"
-                [(ngModel)]="currentProject.projectTitle"
-                name="title"
-                />  
-          </div>
-          <div class="form-group">
-            <label for="description">Project Description</label>
-            <input
-              type="text"
-              class="form-control"
-              id="description"
-              [(ngModel)]="currentProject.projectDescription"
-              name="decription"
-            />
-          </div>
-          
-          <div class="form-group">
-            <label for="githubLink">Github Link to Project</label>
-            <input
-              type="text"
-              class="form-control"
-              id="githubLink"
-              [(ngModel)]="currentProject.githubLink"
-              name="githubLink"
-            />
-          </div>
-          
-          <!-- <button  *ngIf="!isProjectAllocated" class="m-3 btn btn-sm btn-primary" (click)="saveProject(f.value)">
-            Allocate Project
-          </button> -->
-          <button  *ngIf="projectAllocated" class="m-3 btn btn-sm btn-warning" (click)="updateProject()">
-            Update Changes
-          </button>
-        </form>
-        <!-- <button  class="m-3 btn btn-sm btn-primary" (click)="saveProject()">
-            Save Changes
-          </button>
-         -->
-      </div>
-    
+  
 
 
 </div>

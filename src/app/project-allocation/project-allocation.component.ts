@@ -55,6 +55,12 @@ saveProject(data){
   this.projectData.projectTitle=data.title;
   this.projectData.projectDescription=data.description;
   this.projectData.projectId=1;
+  this.projectData.githubLink="";
+  this.projectData.testingCoverage=0;
+  this.projectData.build=0;
+  this.projectData.completionPercentage=0;
+  this.projectData.score=0;
+
   this.projectSerivce.add(this.projectData).subscribe(
     data=>{
       console.log("project allocated="+data);

@@ -37,6 +37,8 @@ import {MatListModule} from '@angular/material/list';
 import { UpdateSubmissionComponent } from './update-submission/update-submission.component';
 import { ProjectAllocationComponent } from './project-allocation/project-allocation.component';
 import { StudentProjectComponent } from './student-project/student-project.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { StudentProjectComponent } from './student-project/student-project.compo
     StudentProjectComponent
   ],
   imports: [
+    NgxChartsModule,
     ProgressBarModule,
     CommonModule,
     BrowserModule,
