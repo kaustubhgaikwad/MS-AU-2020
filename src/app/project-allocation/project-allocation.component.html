@@ -22,6 +22,77 @@
 
 <div *ngIf="!displayStudentList">
 
+  <div *ngIf=viewStatus >
+
+    <div style="display: inline-block;" >
+      <h2>{{currentStudent.name}} Project Status</h2>
+    <ngx-charts-pie-chart
+      [view]="[500, 300]"
+      [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+      [results]="completionData"
+      [legend]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [legendPosition] = "'bottom'"
+      [legendTitle]="'Completion Status'"
+      [labelFormatting]="pieChartLabelCompletion.bind(this, completionData)"
+      [animations]="false">
+    </ngx-charts-pie-chart>
+    </div>
+    <div style="display: inline-block;" >
+    <ngx-charts-pie-chart
+      [view]="[500, 300]"
+      [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+      [results]="testCoveredData"
+      [legend]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [legendPosition] = "'bottom'"
+      [legendTitle]="'Test Coverage'"
+      [labelFormatting]="pieChartLabelTest.bind(this, testCoveredData)"
+      [animations]="false">
+    </ngx-charts-pie-chart>
+    </div>
+    <div  class="project-form-class" style="display: inline-block;">
+
+      <form  #f="ngForm">
+        <div class="form-group">
+          <label for="name">Project Title</label>
+          <br>
+          {{currentProject.projectTitle}}
+        </div>
+        <div class="form-group" >
+          <label for="title">Project Description</label>
+          <br>
+          {{currentProject.projectDescription}}
+        </div>
+        <div class="form-group" >
+          <label for="currentlyWorkingOn">Currently Working On</label>
+          <br>
+          {{currentProject.currentlyWorkingOn}}
+        </div>
+        <div class="form-group" >
+          <label for="title">Github Link</label>
+          <br>
+          {{currentProject.githubLink}}
+        </div>
+        </form>
+      
+    </div>
+
+
+    
+    <button style="display:list-item;" class="m-3 btn btn-sm btn-warning" (click)="changeViewStatus()">
+      Edit Project Allocation
+    </button>
+
+  </div>
+
+
+  <div *ngIf="!viewStatus" >
+
+  
+
     <!-- <admin-nav-bar></admin-nav-bar> -->
 <div  class="edit-form" class="custom-form-class">
     <h4>Project Details</h4>
@@ -29,6 +100,7 @@
       <div class="form-group">
         <label for="name">Student Name</label>
         <input
+          readonly
           type="text"
           class="form-control"
           id="name"
@@ -84,11 +156,14 @@
       <button  *ngIf="isProjectAllocated" class="m-3 btn btn-sm btn-warning" (click)="updateProject()">
         Update Changes
       </button>
+      <button  *ngIf="isProjectAllocated" class="m-3 btn btn-sm btn-info" (click)="changeViewStatus()">
+        View Stats
+      </button>
     </form>
     <!-- <button  class="m-3 btn btn-sm btn-primary" (click)="saveProject()">
         Save Changes
       </button>
      -->
   </div>
-
+</div>
 </div>

@@ -25,7 +25,9 @@ export class ProjectAllocationComponent implements OnInit {
   currentStudent:any;
   currentProject:any;
   isProjectAllocated:boolean
-
+  viewStatus:boolean;
+  completionData=[]
+  testCoveredData=[]
 
   constructor(  
     public authService:AuthService,
@@ -79,10 +81,29 @@ updateProject(){
   this.projectSerivce.update(this.currentProject).subscribe(
     data=>{
       console.log("update project sucessfull");
+      console.log(this.currentProject.projectTitle);
     },error=>{
 
     }
   )
+}
+changeViewStatus(){
+  this.viewStatus = !this.viewStatus;
+}
+
+pieChartLabelCompletion(completionStatus: any[], name: string): string {
+  const item = completionStatus.filter(data => data.name === name);
+  if (item.length > 0) {
+      return item[0].label;
+  }
+  return name;
+}
+pieChartLabelTest(testCoverage: any[], name: string): string {
+  const item = testCoverage.filter(data => data.name === name);
+  if (item.length > 0) {
+      return item[0].label;
+  }
+  return name;
 }
 
 // saveProject(){
@@ -122,6 +143,7 @@ updateProject(){
     this.studentService.getAll().subscribe(
       data=>{
           this.studentData=data;
+          
       },error=>{
 
       }
@@ -141,10 +163,39 @@ updateProject(){
       data=>{
         if(data!=null){
           this.currentProject = data;
-          this.isProjectAllocated=true;  
-          
+          this.completionData.push(
+            {
+              name:'Completion',
+              value:this.currentProject.completionPercentage,
+              label:(this.currentProject.completionPercentage).toString()+"%"
+        }
+        );
+          this.completionData.push(
+            {
+              name:'Pending',
+              value:100-this.currentProject.completionPercentage,
+              label:(100-this.currentProject.completionPercentage).toString()+"%"
+            }
+            );
+          this.testCoveredData.push(
+            {
+              name:'Testing Covered',
+              value:this.currentProject.testingCoverage,
+              label:(this.currentProject.testingCoverage).toString()+"%"
+            }
+            );
+          this.testCoveredData.push(
+            {
+              name:'Testing Pending',
+              value:100-this.currentProject.testingCoverage,
+              label:(this.currentProject.testingCoverage).toString()+"%"
+            }
+            );
+          this.isProjectAllocated=true; 
+          this.viewStatus=true; 
         }else{
           this.isProjectAllocated=false;
+          this.viewStatus=false;
         }
       },error=>{
         console.log(error);
