@@ -1,3 +1,56 @@
+<div *ngIf="evaluateStatus">
+  
+  <form #projectevaluation="ngForm">
+    <h3>Evaluate the project on the basis of </h3>
+    <div class="form-group">
+      <label for="build">Build Quality</label>
+          <input
+          type="number"
+          min=1
+          max=10
+          class="form-control"
+          id="build"
+          ngModel
+          name="build"
+          />  
+    </div>
+    <div class="form-group">
+      <label for="process">Process Followed</label>
+          <input
+          type="number"
+          min=1
+          max=10
+          class="form-control"
+          id="process"
+          ngModel
+          name="process"
+          />  
+    </div>
+    <div class="form-group">
+      <label for="test">Testing Coverage</label>
+          <input
+          type="number"
+          min=1
+          max=10
+          class="form-control"
+          id="test"
+          ngModel
+          name="test"
+          />  
+    </div>
+    <button  type="button" class="m-3 btn btn-sm btn-success"  (click)="submitEvaluation(projectevaluation.value)">
+      Submit Evaluation
+    </button>
+
+
+  </form>
+   
+</div>
+
+<div *ngIf="!evaluateStatus">
+
+
+
 <div *ngIf="displayStudentList" class="col-md-8" style="position: fixed;
     top: 50%;
     left: 50%;
@@ -85,7 +138,9 @@
     <button style="display:list-item;" class="m-3 btn btn-sm btn-warning" (click)="changeViewStatus()">
       Edit Project Allocation
     </button>
-
+    <button style="display:list-item;" class="m-3 btn btn-sm btn-warning" (click)="evaluate()">
+      Evaluate Project
+    </button>
   </div>
 
 
@@ -165,5 +220,6 @@
       </button>
      -->
   </div>
+</div>
 </div>
 </div>

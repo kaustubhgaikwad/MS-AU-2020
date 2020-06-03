@@ -62,6 +62,8 @@
         <li><a href="/home">Home</a></li>
         <li><a routerLink="student/project" class="nav-link">Project Allocation</a></li>
         <li><a routerLink="student/assignments" class="nav-link">View Assignments</a></li>
+        <li><a routerLink="student/performance/{{student.id}}" class="nav-link">View Performance</a></li>
+        <!-- student/performance/:id -->
         <li><a href="#" (click)="authService.logout()">Logout</a></li>
     </ul>
 </header> 

@@ -22,6 +22,7 @@ export class StudentProjectComponent implements OnInit {
   testValue=0;
   completionData=[]
   testCoveredData=[]
+  isEvaluated:boolean;
   // completionStatus=[
   //   {
   //     "name": "Completion",
@@ -98,6 +99,11 @@ getProjectDetails(){
         if(data!=null){
           console.log("Inside get Project Details");
           this.currentProject=data;
+          if(this.currentProject.score > 0 ){
+            this.isEvaluated=true;
+          }else{
+            this.isEvaluated=false;
+          }
           this.completionData.push(
             {
               name:'Completion',

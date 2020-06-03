@@ -1,0 +1,42 @@
+<div class="row" >
+    <br><br>
+    <div *ngIf="isAssignmenrloaded" style="margin-left: 50px; margin-top: 15px;">
+    <ngx-charts-bar-vertical
+    [view]="[300,300]"
+    [scheme]="{domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']}"
+    [results]="assignmentPerformance"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendPosition] = "'bottom'"
+    [legendTitle]="'Assignment Scores'"
+    style="margin-top: 35px;"
+    >
+    </ngx-charts-bar-vertical>
+</div>
+<div *ngIf="isAssignmenrloaded" style="margin-left: 50px; margin-top: 15px">
+    <ngx-charts-bar-vertical
+    [view]="[300,300]"
+    [scheme]="{domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']}"
+    [results]="projectPerformance"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendPosition] = "'bottom'"
+    [legendTitle]="'Project Scores'"
+    style="margin-top: 35px;"    
+    >
+    </ngx-charts-bar-vertical>
+</div>
+
+</div>

@@ -38,6 +38,7 @@ import { UpdateSubmissionComponent } from './update-submission/update-submission
 import { ProjectAllocationComponent } from './project-allocation/project-allocation.component';
 import { StudentProjectComponent } from './student-project/student-project.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { StudentPerformanceComponent } from './student-performance/student-performance.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     StudentAssignmentSubmissionComponent,
     UpdateSubmissionComponent,
     ProjectAllocationComponent,
-    StudentProjectComponent
+    StudentProjectComponent,
+    StudentPerformanceComponent
   ],
   imports: [
     NgxChartsModule,
@@ -99,6 +101,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   { path: 'student/project', component: StudentProjectComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
+  { path: 'student/performance/:id', component: StudentPerformanceComponent,canActivate:[AuthGuard]  },
   { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'admin/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  }
   

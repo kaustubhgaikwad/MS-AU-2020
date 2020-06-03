@@ -13,7 +13,7 @@
       [legend]="true"
       [labels]="true"
       [doughnut]="true"
-      [legendPosition] = "'bottom'"
+      [legendPosition] = "'bottom'" 
       [legendTitle]="'Completion Status'"
       [labelFormatting]="pieChartLabelCompletion.bind(this, completionData)"
       [animations]="false">
@@ -60,7 +60,7 @@
       
     </div>
     
-    <button class="m-3 btn btn-sm btn-warning" (click)="changeShowStatus()">
+    <button class="m-3 btn btn-sm btn-warning"  [disabled]="isEvaluated" (click)="changeShowStatus()">
       Edit
     </button>  
   </div>

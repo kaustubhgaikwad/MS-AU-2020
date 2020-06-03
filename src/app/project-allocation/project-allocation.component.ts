@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { ProjectEvaluationService } from '../services/project-evaluation.service';
+import { projectEvaluation } from '../models/projectEvaluation';
 
 @Component({
   selector: 'app-project-allocation',
@@ -28,21 +30,72 @@ export class ProjectAllocationComponent implements OnInit {
   viewStatus:boolean;
   completionData=[]
   testCoveredData=[]
-
+  projectParameters:any;
+  evaluateStatus:any;
+  score:number
   constructor(  
     public authService:AuthService,
     private studentService: StudentService,
     private router:Router,
     private toastr:ToastrService,
-    private projectSerivce:ProjectService
+    private projectSerivce:ProjectService,
+    private projectEvaluation:ProjectEvaluationService
     ) { 
       this.columnDefs = this.createColumnDefs();
     }
 
   ngOnInit(): void {
     this.displayStudentList=true;
+    this.evaluateStatus=false;
     this.getAllRecords();
+    this.getProjectParameters();
+
   }
+  evaluate(){
+    this.evaluateStatus=true;
+  }
+  submitEvaluation(marks){
+    console.log( typeof (this.currentProject.score));
+
+    console.log((marks.process*(this.projectParameters[0].processWeightage)/10));
+    //this.score=
+    console.log("Process Marks="+ marks.process);
+    console.log("Build Marks="+ marks.build);
+    console.log("Test Marks="+ marks.test);
+    console.log("Process Wieghtage"+ ((this.projectParameters[0].processWeightage)/10))
+    console.log("Build Wieghtage"+ ((this.projectParameters[0].buildWeightage)/10))
+    console.log("Test Wieghtage"+ ((this.projectParameters[0].testingWeightage)/10))
+    this.currentProject.score = 0;
+    this.currentProject.buildMarks=marks.build
+    this.currentProject.testingMarks=marks.test
+    this.currentProject.processMarks=marks.process
+    this.currentProject.score=( (marks.process*(this.projectParameters[0].processWeightage)/10))+((marks.build*(this.projectParameters[0].buildWeightage)/10))+((marks.test*(this.projectParameters[0].testingWeightage)/10))
+    
+    console.log("Marks="+ this.currentProject.score);
+    this.projectSerivce.update(this.currentProject).subscribe(
+      data=>{
+        console.log("Evalution Done");
+      },error=>{
+
+      }
+    );
+    this.evaluateStatus=false;
+    }
+  
+  getProjectParameters() {
+    this.projectEvaluation.get().subscribe(
+      data=>{
+//       this.projectParameters = new projectEvaluation();
+        this.projectParameters = data
+        console.log("Project Parameters")
+        console.log("Build weightage="+this.projectParameters[0].buildWeightage);
+        console.log("Process weightage="+this.projectParameters[0].processWeightage)
+        console.log("Testing weightage="+this.projectParameters[0].testingWeightage)
+      },error=>{
+
+      }
+    )
+   }
 
   onGridReady(params): void {  
     this.api = params.api;  
