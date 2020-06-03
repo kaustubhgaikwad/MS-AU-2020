@@ -60,6 +60,7 @@ saveProject(data){
   this.projectData.build=0;
   this.projectData.completionPercentage=0;
   this.projectData.score=0;
+  this.projectData.currentlyWorkingOn="";
 
   this.projectSerivce.add(this.projectData).subscribe(
     data=>{

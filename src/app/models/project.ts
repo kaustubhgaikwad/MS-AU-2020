@@ -10,4 +10,5 @@ public testingCoverage:number;
 public build:number;
 public completionPercentage:number;
 public score:number;
+public currentlyWorkingOn:String;
 }

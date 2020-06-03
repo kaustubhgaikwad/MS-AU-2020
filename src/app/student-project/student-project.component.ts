@@ -20,30 +20,32 @@ export class StudentProjectComponent implements OnInit {
   showStatus:boolean;
   value=0;
   testValue=0;
-  completionStatus=[
-    {
-      "name": "Completion",
-      "value": this.value,
-      "label": this.value.toString()+"%"
-    },
-    {
-      "name": "Pending",
-      "value": 100-this.value,
-      "label": (100-this.value).toString()+"%"
-    }
-  ]
-  testCoverage=[
-    {
-      "name": "Testing Covered",
-      "value": this.testValue,
-      "label": this.testValue.toString()+"%"
-    },
-    {
-      "name": "Testing Uncovered",
-      "value": 100-this.testValue,
-      "label": (100-this.testValue).toString()+"%"
-    }
-  ]
+  completionData=[]
+  testCoveredData=[]
+  // completionStatus=[
+  //   {
+  //     "name": "Completion",
+  //     "value": this.value,
+  //     "label": "35iuguig"
+  //   },
+  //   {
+  //     "name": "Pending asdgaso;dg;asdgas",
+  //     "value": 100-this.value,
+  //     "label": "kkkkk"
+  //   }
+  // ]
+  // testCoverage=[
+  //   {
+  //     "name": "Testing Covered",
+  //     "value": this.testValue,
+  //     "label": this.testValue.toString()+"%"
+  //   },
+  //   {
+  //     "name": "Testing Uncovered",
+  //     "value": 100-this.testValue,
+  //     "label": (100-this.testValue).toString()+"%"
+  //   }
+  // ]
   changeShowStatus(){
 
     console.log("Status Changed");
@@ -95,10 +97,37 @@ getProjectDetails(){
       data=>{
         if(data!=null){
           console.log("Inside get Project Details");
-          
           this.currentProject=data;
+          this.completionData.push(
+            {
+              name:'Completion',
+              value:this.currentProject.completionPercentage,
+              label:(this.currentProject.completionPercentage).toString()+"%"
+        }
+        );
+          this.completionData.push(
+            {
+              name:'Pending',
+              value:100-this.currentProject.completionPercentage,
+              label:(100-this.currentProject.completionPercentage).toString()+"%"
+            }
+            );
+          this.testCoveredData.push(
+            {
+              name:'Testing Covered',
+              value:this.currentProject.testingCoverage,
+              label:(this.currentProject.testingCoverage).toString()+"%"
+            }
+            );
+          this.testCoveredData.push(
+            {
+              name:'Testing Pending',
+              value:100-this.currentProject.testingCoverage,
+              label:(this.currentProject.testingCoverage).toString()+"%"
+            }
+            );
           this.value=this.currentProject.completionPercentage;
-          this.testValue=this.currentProject.testCoverage;
+          this.testValue=this.currentProject.testingCoverage;
           console.log(this.currentProject);
           this.projectAllocated=true;
         }else{
@@ -113,14 +142,29 @@ getProjectDetails(){
 }
 updateProject(){
   console.log("Compltion=",this.currentProject.completionPercentage);
+
   this.projectService.update(this.currentProject).subscribe(
     data=>{
       this.value=this.currentProject.completionPercentage;
       this.testValue=this.currentProject.testCoverage;
-      console.log("Test Value"+this.testValue);
-      console.log("Cove"+this.value);
+      console.log("Test Value"+this.currentProject.testingCoverage);
+      console.log("Cover"+this.value);
       console.log("Project Details Updated");
+
       console.log("Data="+data);
+      
+      this.completionData[0].value=this.currentProject.completionPercentage;
+      this.completionData[0].label=(this.currentProject.completionPercentage).toString()+"%";
+      
+      this.completionData[1].value=100-this.currentProject.completionPercentage;
+      this.completionData[1].label=(100-this.currentProject.completionPercentage).toString()+"%";
+      
+      this.testCoveredData[0].value=this.currentProject.testingCoverage;
+      this.testCoveredData[0].label=(this.currentProject.testingCoverage).toString()+"%";
+
+      this.testCoveredData[1].value=100-this.currentProject.testingCoverage;
+      this.testCoveredData[1].label=(100-this.currentProject.testingCoverage).toString()+"%";
+      
       this.changeShowStatus();
     },error=>{
 

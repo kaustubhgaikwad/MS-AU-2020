@@ -9,13 +9,13 @@
     <ngx-charts-pie-chart
       [view]="[500, 300]"
       [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
-      [results]="completionStatus"
+      [results]="completionData"
       [legend]="true"
       [labels]="true"
       [doughnut]="true"
       [legendPosition] = "'bottom'"
       [legendTitle]="'Completion Status'"
-      [labelFormatting]="pieChartLabelCompletion.bind(this, completionStatus)"
+      [labelFormatting]="pieChartLabelCompletion.bind(this, completionData)"
       [animations]="false">
     </ngx-charts-pie-chart>
     </div>
@@ -23,13 +23,13 @@
     <ngx-charts-pie-chart
       [view]="[500, 300]"
       [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
-      [results]="testCoverage"
+      [results]="testCoveredData"
       [legend]="true"
       [labels]="true"
       [doughnut]="true"
       [legendPosition] = "'bottom'"
       [legendTitle]="'Test Coverage'"
-      [labelFormatting]="pieChartLabelTest.bind(this, testCoverage)"
+      [labelFormatting]="pieChartLabelTest.bind(this, testCoveredData)"
       [animations]="false">
     </ngx-charts-pie-chart>
     </div>
@@ -42,9 +42,14 @@
           {{currentProject.projectTitle}}
         </div>
         <div class="form-group" >
-          <label for="title">Project Title</label>
+          <label for="title">Project Description</label>
           <br>
           {{currentProject.projectDescription}}
+        </div>
+        <div class="form-group" >
+          <label for="currentlyWorkingOn">Currently Working On</label>
+          <br>
+          {{currentProject.currentlyWorkingOn}}
         </div>
         <div class="form-group" >
           <label for="title">Github Link</label>
@@ -108,6 +113,17 @@
             id="githubLink"
             [(ngModel)]="currentProject.githubLink"
             name="githubLink"
+          />
+        </div>
+
+        <div class="form-group" style="display: inline-block;margin-left: 10px;" >
+          <label for="currentlyWorkingOn">currentlyWorkingOn</label>
+          <input
+            type="text"
+            class="form-control"
+            id="currentlyWorkingOn"
+            [(ngModel)]="currentProject.currentlyWorkingOn"
+            name="currentlyWorkingOn"
           />
         </div>
 
