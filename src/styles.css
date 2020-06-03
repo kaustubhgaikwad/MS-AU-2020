@@ -24,10 +24,26 @@
         padding: 15px;
 }
 
-/* body{
-    background-image: url("./assets/img/bg-2.jpg");
-    
-} */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 50px;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  .container {
+    padding: 2px 16px;
+  }
+
+  body{
+    background-image: url("./assets/img/admin-bg.jpg");   
+}
+ /* .admin-bg{
+    background-image: url("./assets/img/admin-bg.jpg");   
+}  */
 /* html, body { height: 100%; 
     background-image: url("https://www.pexels.com/photo/gray-laptop-computer-showing-html-codes-in-shallow-focus-photography-160107/");
 } */

@@ -39,6 +39,7 @@ import { ProjectAllocationComponent } from './project-allocation/project-allocat
 import { StudentProjectComponent } from './student-project/student-project.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StudentPerformanceComponent } from './student-performance/student-performance.component';
+import { SidebarModule } from 'ng-sidebar';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { StudentPerformanceComponent } from './student-performance/student-perfo
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    SidebarModule.forRoot(),
     AgGridModule.withComponents([]),
     ToastrModule.forRoot(),
     RouterModule.forRoot([

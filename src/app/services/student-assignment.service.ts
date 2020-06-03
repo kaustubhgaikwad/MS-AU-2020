@@ -11,6 +11,10 @@ export class StudentAssignmentService {
 
   constructor(private http:HttpClient) { }
 
+  getAssignmentDone(){
+   return this.http.get(baseUrl+'/assignmentsDone');
+  }
+
   addRecord(data){
     return this.http.post(baseUrl+'/add',data);
   }

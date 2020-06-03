@@ -18,3 +18,64 @@
 <assignment-details></assignment-details>
 <assignment-list></assignment-list> -->
 <!-- <admin-nav-bar></admin-nav-bar> -->
+<!-- <div *ngIf="isAssignmentRecordLoaded" style="margin-left: 35%;">
+
+  <ngx-charts-bar-vertical
+  [view]="[300,300]"
+  [scheme]="{domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']}"
+  [results]="assignmentRecords"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [legendPosition] = "'bottom'"
+  [legendTitle]="'Assignments Status'"
+  style="margin-top: 35px; align-items: center;"    
+  >
+  </ngx-charts-bar-vertical>
+
+</div> -->
+<div class="card-deck" style="margin-right: 10px; margin-left: 10px; margin-top: 10px;">
+  <div class="card">
+    <img src="https://us.123rf.com/450wm/tab1962/tab19621510/tab1962151000044/47034071-paper-and-pen-over-laptop-with-coffee-and-mouse-on-side-of-rustic-wooden-desktop-.jpg?ver=6" class="card-img-top" alt="..." style="height: 258px;" >
+    <div class="card-body">
+      <h5 class="card-title">Assignments</h5>
+      <p class="card-text"></p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><a routerLink="assignments" class="nav-link">View</a></small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCWqIgXOGePiLSwNG_d4ZdNB3qM5uocUora1AyMaeWR8zQK18x&usqp=CAU" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Manage Projects</h5>
+      <p class="card-text">Assignm evaluate the  grad projects.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><a routerLink="/projects" class="nav-link">Projects</a></small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://www.incimages.com/uploaded_files/image/1940x900/getty_854590288_370851.jpg" style="height: 258px;" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Calculate ScoreCard</h5>
+      <p class="card-text">Evaluate the hardwork of all the grads</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
