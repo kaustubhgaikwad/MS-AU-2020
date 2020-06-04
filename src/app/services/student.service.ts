@@ -16,4 +16,16 @@ export class StudentService {
   getAll(){
     return this.http.get(baseUrl+'/all');
   }
+  getStudentById(id){
+    return this.http.get(baseUrl+"/"+id);
+  }
+  getStudentScore(id){
+    return this.http.get(baseUrl+"/score/"+id);
+  }
+  updateStudentFinalScore(data){
+    return this.http.put(baseUrl+"/finalscore",data);
+  }
+  calculateFinalScore(){
+    return this.http.get(baseUrl+"/calculatefinalScore");
+  }
 }

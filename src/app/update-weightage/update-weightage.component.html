@@ -1,0 +1,57 @@
+<div class="list-row" >
+
+
+
+        <div class ="md-8" class="slider-class" *ngIf="!showList">
+        <div style="display:inline-table" >
+            Assignment Wieghtage
+            <mat-slider
+            aria-label="Assignment Wieghtage"
+            thumbLabel
+            [(ngModel)]="weightage.assignment"
+            tickInterval="100"
+            [displayWith]="formatLabel"
+            (ngModelChange)="onAssignmentChange()"
+            min="0"
+            max="100">
+            </mat-slider>
+            <p>Value={{weightage.assignment}}</p>
+        </div>
+        <div style="display:inline-table" >
+            Project Wieghtage
+            <mat-slider
+                thumbLabel
+                [(ngModel)]="weightage.project"
+                [displayWith]="formatLabel"
+                tickInterval="100"
+                (ngModelChange)="onProjectChange()"
+                min="0"
+                max="100">
+            </mat-slider>
+            <p>Value={{weightage.project}}</p>
+        </div>
+        <button type="button" (click)="updateWeightage()">Update</button>
+        <p>{{message}}</p>
+
+
+    </div>
+
+<div class="col-md-8" *ngIf="showList" >
+<div  >
+      <h4>Student List</h4>
+      <ag-grid-angular 
+        style="width: 100%; height: 300px;" 
+        class="ag-theme-alpine" 
+        (gridReady)="onGridReady($event)"  
+        [columnDefs]="columnDefs" 
+        [rowData]="students" 
+        rowSelection="single" 
+        pagination="true" 
+        paginationPageSize=5  
+      ></ag-grid-angular>
+      <button type="button" (click)="changeUpdateStatus()">Update Assessment Parameters</button>
+      <button type="button" (click)="calculate()">Calculate Score</button>
+      <button type="button" class="m-3 btn btn-sm btn-info"   (click)="calulateFinalScore()" >Calculate Scorecard for every one</button>
+</div>
+</div>
+</div>

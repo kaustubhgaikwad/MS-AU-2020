@@ -20,7 +20,6 @@ export class StudentAssignmentService {
   }
   getRecordByStudentId(id){
     return this.http.get(baseUrl+'/studentid/'+id);
-
   }
 
   getRecord(title,email){
@@ -37,5 +36,9 @@ export class StudentAssignmentService {
   }
   getRecordById(id){
     return this.http.get(baseUrl+'/'+id);
+  }
+
+  calculateAssignmentScore(id){
+    return this.http.get(baseUrl+"/score/"+id);
   }
 }

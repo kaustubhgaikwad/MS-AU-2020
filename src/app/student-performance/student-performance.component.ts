@@ -89,6 +89,7 @@ export class StudentPerformanceComponent implements OnInit {
   getProjectPerformance(){
     this.projectService.getByStudentId(this.route.snapshot.paramMap.get('id')).subscribe(
       data=>{
+        console.log("project data loaded")
           this.projectRecords= data;
           
             this.projectPerformance.push(

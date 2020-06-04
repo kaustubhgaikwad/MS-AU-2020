@@ -1,0 +1,115 @@
+<div *ngIf="dataLoaded" style="margin-left: 50px; margin-top: 50px">
+    <div style="display: inline-block;"> 
+        
+        <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <!-- <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;"> -->
+                <h4>Assessment Reocord</h4>
+              </div>
+              <div class="flip-card-back">
+                  <div *ngIf="!showGradeAssignment"> 
+                    <ngx-charts-bar-vertical
+                        [view]="[300,200]"
+                        [scheme]="{domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']}"
+                        [results]="marksdata"
+                        [gradient]="gradient"
+                        [xAxis]="showXAxis"
+                        [yAxis]="showYAxis"
+                        [legend]="showLegend"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel"
+                        [legendPosition] = "'bottom'"
+                        [legendTitle]="'Project Scores'"
+                        style="margin-top: 35px;"    
+                    >
+                </ngx-charts-bar-vertical>
+                </div>
+                <div *ngIf="showGradeAssignment" >
+                    <button type="button" (click)="calulateAssignmentScore()">Generate Assignment Scores</button>
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- 
+          <button type="button" (click)="calulateAssignmentScore()">Generate Assignment Scores</button> -->
+     
+</div>
+
+    <div *ngIf="paraMetersLoaded" style="display:inline-block; margin-left: 25px;">
+            
+        <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <!-- <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;"> -->
+                <h4>Assessment Parameters</h4>
+              </div>
+              <div class="flip-card-back">
+                <ngx-charts-pie-chart
+                    [view]="[300,200]"
+                    [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+                    [results]="assessmentParameters"
+                    [legend]="true"
+                    [labels]="true"
+                    [doughnut]="true"
+                    [legendPosition] = "'bottom'"
+                    [legendTitle]="'Assesment Weightage'"
+                    [labelFormatting]="pieChartLabel.bind(this, assessmentParameters)"
+                    [animations]="false">
+            </ngx-charts-pie-chart>
+              </div>
+            </div>
+          </div>
+
+            <!-- <ngx-charts-pie-chart
+            [view]="[500, 300]"
+            [scheme]="{domain: ['#5AA454', '#A10A28', '#C7B42C']}"
+            [results]="assessmentParameters"
+            [legend]="true"
+            [labels]="true"
+            [doughnut]="true"
+            [legendPosition] = "'bottom'"
+            [legendTitle]="'Assesment Weightage'"
+            [labelFormatting]="pieChartLabel.bind(this, assessmentParameters)"
+            [animations]="false">
+            </ngx-charts-pie-chart> -->
+    </div>
+    <div *ngIf="scoreCalculated" style="display:inline-block; margin-left: 25px;" >
+    <div class="flip-card" >
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <!-- <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;"> -->
+            <h4>Final Score</h4>
+          </div>
+          <div class="flip-card-back">
+            <h2>{{currentStudent.score}}%</h2> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="scoreCalculated" style="display:inline-block; margin-left: 25px;" >
+        <div class="flip-card" >
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <!-- <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;"> -->
+                <h4>Your Percentile</h4>
+              </div>
+              <div class="flip-card-back">
+                <h2>{{currentStudent.percentile}}%</h2> 
+              </div>
+            </div>
+          </div>
+        </div>
+
+</div>
+
+<div *ngIf="authService.isAdmin()">
+<button type="button" class="m-3 btn btn-sm btn-info" (click)="calulateAssignmentScore()" routerLink="/admin/assignments" >Evalute Assignments</button>
+
+<button type="button" class="m-3 btn btn-sm btn-warning" (click)="calulateAssignmentScore()" routerLink="/admin/projects" >Evalute Project</button>
+
+<button type="button" class="m-3 btn btn-sm btn-warning"   (click)="calulateFinalScore()" >Calculate final Score</button>
+</div>

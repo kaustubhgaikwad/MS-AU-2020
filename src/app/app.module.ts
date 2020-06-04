@@ -40,6 +40,9 @@ import { StudentProjectComponent } from './student-project/student-project.compo
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StudentPerformanceComponent } from './student-performance/student-performance.component';
 import { SidebarModule } from 'ng-sidebar';
+import { UpdateWeightageComponent } from './update-weightage/update-weightage.component';
+import {MatSliderModule} from '@angular/material/slider';
+import { ScoreCardComponent } from './score-card/score-card.component';
 
 
 @NgModule({
@@ -60,9 +63,12 @@ import { SidebarModule } from 'ng-sidebar';
     UpdateSubmissionComponent,
     ProjectAllocationComponent,
     StudentProjectComponent,
-    StudentPerformanceComponent
+    StudentPerformanceComponent,
+    UpdateWeightageComponent,
+    ScoreCardComponent
   ],
   imports: [
+    MatSliderModule,
     NgxChartsModule,
     ProgressBarModule,
     CommonModule,
@@ -99,8 +105,11 @@ import { SidebarModule } from 'ng-sidebar';
   { path: 'admin/assignments/add', component: AddAssignmentComponent ,canActivate:[AuthGuard] },
   { path: 'admin/assignments/:id', component: AssignmentDetailsComponent,canActivate:[AuthGuard]  },
   { path: 'admin/projects', component: ProjectAllocationComponent,canActivate:[AuthGuard]  },
+  { path: 'admin/updateweightage', component: UpdateWeightageComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
   { path: 'student/project', component: StudentProjectComponent ,canActivate:[AuthGuard] },
+  { path: 'score-card/:id', component: ScoreCardComponent ,canActivate:[AuthGuard] },
+  { path: 'student/score-card/:id', component: ScoreCardComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
   { path: 'student/performance/:id', component: StudentPerformanceComponent,canActivate:[AuthGuard]  },
