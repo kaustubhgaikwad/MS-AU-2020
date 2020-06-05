@@ -8,13 +8,11 @@ import { StudentService } from '../services/student.service';
 })
 export class NoAccessComponent implements OnInit {
 
-  constructor(private studentService:StudentService) { }
-  hello ="";
+  constructor() { }
+  
   ngOnInit(): void {
-    this.hello="hello";
+  
   }
-  getEmail(){
-    this.studentService.getStudent("email").subscribe();
-  }
+  
 
 }

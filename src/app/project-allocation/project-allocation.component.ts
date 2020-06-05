@@ -177,14 +177,14 @@ pieChartLabelTest(testCoverage: any[], name: string): string {
 
   private createColumnDefs() {  
     return [{  
-        headerName: 'Student Name',  
+        headerName: 'Candidate Name',  
         field: 'name',  
         filter: true,  
         enableSorting: true,  
         editable: true,  
         sortable: true  
     },{  
-      headerName: 'Student Email',  
+      headerName: 'Candidate Email',  
       field: 'emailId',  
       filter: true,  
       enableSorting: true,  

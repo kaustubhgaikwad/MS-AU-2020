@@ -138,7 +138,7 @@ export class AssignmentListComponent implements OnInit {
                 sortable: true  
             },
             {  
-              headerName: 'StudentName',  
+              headerName: 'Candidate Name',  
               field: 'studentName',  
               filter: true,  
               editable: true,  

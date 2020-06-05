@@ -33,7 +33,4 @@ describe('NoAccessComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('test email', () => {
-    expect(component.getEmail());
-  });
 });
