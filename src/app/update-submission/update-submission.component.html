@@ -1,4 +1,3 @@
-<!-- <admin-nav-bar></admin-nav-bar> -->
 <div  class="edit-form" class="custom-form-class">
     <h4>Assignment</h4>
     <form  #f="ngForm">
@@ -10,6 +9,7 @@
           id="title"
           [(ngModel)]="SubmittedAssignment.assignmentTitle"
           name="title"
+          readonly
         />`
       </div>
       <div class="form-group">
@@ -20,16 +20,28 @@
           id="description"
           [(ngModel)]="SubmittedAssignment.assignmentDescription"
           name="description"
+          readonly
         />
       </div>
       <div class="form-group" *ngIf="isSubmitted">
         <label for="solution">Solution</label>
+        <div class="alert alert-danger" *ngIf="solution.touched && !solution.valid">
+          <div *ngIf="solution.errors.required">
+            Should not be empty
+          </div>
+          <div *ngIf="solution.errors.minlength">
+            Min Length should be 10
+          </div> 
+        </div>
         <input
           type="text"
           class="form-control"
           id="solution"
           [(ngModel)]="SubmittedAssignment.assignmentSolution"
           name="solution"
+          #solution="ngModel"
+          required
+          minlength="10"
         />
       </div>
       <div class="form-group" *ngIf="!isSubmitted">
@@ -58,65 +70,19 @@
         [(ngModel)]="SubmittedAssignment.score"
         >
       </div>
-      <!-- <div class="form-group">
-        <label for="name">Enter Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          [(ngModel)]="SubmittedAssignment.name"
-          name="name"
-        />
-      </div> -->
-     
+ 
       <div *ngIf="!authService.isAdmin() && !isSubmitted " >
-        <button type="submit" class="badge badge-success" (click)="submitAssignment(f.value)">Submit Assignment </button>
+        <button type="submit" class="badge badge-success" [disabled]="!solution.valid" (click)="submitAssignment(f.value)">Submit Assignment </button>
       </div>
       <div *ngIf="!authService.isAdmin() && isSubmitted && SubmittedAssignment.score==0 " >
-        <button type="submit" class="badge badge-success" (click)="updateSubmission()">Submit Updated Assignment</button>
+        <button type="submit" class="badge badge-success" [disabled]="!solution.valid" (click)="updateSubmission()">Submit Updated Assignment</button>
       </div>
       <br>
       <br>
       <button *ngIf="authService.isAdmin()" class="m-3 btn btn-sm btn-warning" (click)="evaluteAssignment()">
         Evalute
       </button>
-  
-      <!-- <div class="form-group">
-        <label><strong>Status:</strong></label>
-        {{ currentTutorial.published ? "Published" : "Pending" }}
-      </div> -->
     </form>
-  
-    <!-- <button
-      class="badge badge-primary mr-2"
-      *ngIf="currentTutorial.published"
-      (click)="updatePublished(false)"
-    >
-      UnPublish
-    </button> 
-    <button
-      *ngIf="!currentTutorial.published"
-      class="badge badge-primary mr-2"
-      (click)="updatePublished(true)"
-    >
-      Publish
-    </button>-->
-<!--   
-    <div *ngIf="!authService.isAdmin()">
-      <button type="submit" class="badge badge-success" (click)="submitAssignment(f.value)">Submit Assignment</button>
-    </div> -->
-                     
-    <!-- <button *ngIf="authService.isAdmin()" class="badge badge-danger mr-2" (click)="deleteAssignment()">
-      Delete
-    </button>
-  
-    <button *ngIf="authService.isAdmin()" type="submit" class="badge badge-success" (click)="updateAssignment()">
-      Update
-    </button> -->
+
     <p  *ngIf="!authService.isAdmin()">{{ message }}</p>
   </div>
-  
-  <!-- <div *ngIf="!currentAssignment">
-    <br />
-    <p>Cannot access this Assignment...</p>
-  </div> -->
