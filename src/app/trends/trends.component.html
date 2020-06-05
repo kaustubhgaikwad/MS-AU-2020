@@ -1,0 +1,127 @@
+
+<div *ngIf="isdataloaded"> 
+<!-- <ngx-charts-line-chart
+[view]="view"
+[scheme]="colorScheme"
+[results]="studentDetails"
+[gradient]="gradient"
+[xAxis]="showXAxis"
+[yAxis]="showYAxis"
+[legend]="showLegend"
+[showXAxisLabel]="showXAxisLabel"
+[showYAxisLabel]="showYAxisLabel"
+[xAxisLabel]="xAxisLabel"
+[yAxisLabel]="yAxisLabel"
+[autoScale]="autoScale"
+[timeline]="timeline"
+(select)="onSelect($event)">
+</ngx-charts-line-chart> -->
+
+<div style="display: inline-block;" >
+    <div style="margin-left: 10px; display: inline-block;" >
+        <br>
+        <h4 style="margin-left: 10px; text-align: center;" >Location Wise Trends</h4>
+    <ngx-charts-bar-vertical
+    [view]="[400,400]"
+    [scheme]="{domain: ['#FA8072','#90EE90']}"
+    [results]="angularData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendPosition] = "'bottom'"
+    [legendTitle]="'Angular Coureses Taken'"
+    style="margin-top: 35px;"    
+    >
+    </ngx-charts-bar-vertical>
+</div>
+    <div style="display: inline-block;" >
+    <ngx-charts-bar-vertical
+    [view]="[400,400]"
+    [scheme]="{domain: [ '#87CEFA','#90EE90']}"
+    [results]="springData"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [legendPosition] = "'bottom'"
+    [legendTitle]="'Spring Courses taken'"
+    style="margin-top: 35px;"    
+    >
+    </ngx-charts-bar-vertical>
+    </div>
+</div>
+    <br>
+    <br>
+    <h4 style="text-align: center;">Candidates Scoing Details</h4>
+    <div *ngIf="studentmarksloaded" style="display: inline-block;" >
+
+        <div style="display: inline-block;" >
+            <ngx-charts-bar-vertical
+            [view]="[400,400]"
+            [scheme]="{domain: ['#FA8072', '#FF7F50', '#90EE90', '#9370DB']}"
+            [results]="studentAssignmentMakrs"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisStudent"
+            [yAxisLabel]="yAxisStudent"
+            [legendPosition] = "'bottom'"
+            [legendTitle]="'AssignmentMarks'"
+            style="margin-top: 35px;"    
+            >
+            </ngx-charts-bar-vertical>
+        </div>
+        <div style="display: inline-block;" >
+            <ngx-charts-bar-vertical
+            [view]="[400,400]"
+            [scheme]="{domain: ['#90EE90', '#9370DB']}"
+            [results]="studentProjectMakrs"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisStudent"
+            [yAxisLabel]="yAxisStudent"
+            [legendPosition] = "'bottom'"
+            [legendTitle]="'ProjectMarks'"
+            style="margin-top: 35px;"    
+            >
+            </ngx-charts-bar-vertical>
+        </div>
+        <div style="display: inline-block;" >
+            <ngx-charts-bar-vertical
+            [view]="[400,400]"
+            [scheme]="{domain: ['#9370DB','#9370DB']}"
+            [results]="studentSCore"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisStudent"
+            [yAxisLabel]="yAxisStudent"
+            [legendPosition] = "'bottom'"
+            [legendTitle]="'TotalMarks'"
+            style="margin-top: 35px;"    
+            >
+            </ngx-charts-bar-vertical>
+        </div>
+
+
+    </div>
+</div>

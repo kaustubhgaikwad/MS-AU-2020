@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { StudentAssignmentService } from '../services/student-assignment.service';
+import { ColDef, GridApi, ColumnApi } from 'ag-grid-community';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-admin',
@@ -22,12 +24,57 @@ export class AdminComponent implements OnInit {
   xAxisLabel = 'Assignment Title';
   showYAxisLabel = true;
   yAxisLabel = 'Completed No';
-  constructor(public authService:AuthService,private studentAssignmentService:StudentAssignmentService) { }
+  public studentColDefs: ColDef[]; 
+  studentRecords:any;
+  private api: GridApi;  
+  private columnApi: ColumnApi;
+
+  constructor(public authService:AuthService,private studentAssignmentService:StudentAssignmentService,private studentService:StudentService) { 
+    this.studentColDefs = this.createStudentColDefs();
+  }
+
+  createStudentColDefs(){
+    return [{  
+      headerName: 'Candidate Name',  
+      field: 'name',  
+      filter: true,  
+      enableSorting: true,  
+      editable: true,  
+      sortable: true  
+  },
+  {  
+    headerName: 'Email Id',  
+    field: 'emailId',  
+    filter: true,  
+    enableSorting: true,  
+    editable: true,  
+    sortable: true  
+} 
+]
+  }
+  onGridReady(params): void {  
+    this.api = params.api;  
+    this.columnApi = params.columnApi;  
+    this.api.sizeColumnsToFit();  
+}
 
   ngOnInit(): void {
     this.admin=this.authService.isAdmin();
     this.getAssignmentRecord();
+    this.getStudentsRecord();
   }
+  getStudentsRecord(){
+
+    this.studentService.getAll().subscribe(
+      data=>{
+        this.studentRecords=data;
+      },error=>{
+
+      }
+    )
+
+  }
+
 
   getAssignmentRecord(){
     this.studentAssignmentService.getAssignmentDone().subscribe(

@@ -43,6 +43,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { UpdateWeightageComponent } from './update-weightage/update-weightage.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { ScoreCardComponent } from './score-card/score-card.component';
+import { TrendsComponent } from './trends/trends.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { ScoreCardComponent } from './score-card/score-card.component';
     StudentProjectComponent,
     StudentPerformanceComponent,
     UpdateWeightageComponent,
-    ScoreCardComponent
+    ScoreCardComponent,
+    TrendsComponent
   ],
   imports: [
     MatSliderModule,
@@ -114,7 +116,8 @@ import { ScoreCardComponent } from './score-card/score-card.component';
   { path: 'student/assignments/:id', component: SubmitAssignmentComponent,canActivate:[AuthGuard]  },
   { path: 'student/performance/:id', component: StudentPerformanceComponent,canActivate:[AuthGuard]  },
   { path: 'student/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  },
-  { path: 'admin/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  }
+  { path: 'admin/update-assignments/:id', component: UpdateSubmissionComponent,canActivate:[AuthGuard]  },
+  { path: 'admin/trends', component: TrendsComponent,canActivate:[AuthGuard]  }
   
   
     ]),

@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="card">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCWqIgXOGePiLSwNG_d4ZdNB3qM5uocUora1AyMaeWR8zQK18x&usqp=CAU" class="card-img-top" alt="...">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSCWqIgXOGePiLSwNG_d4ZdNB3qM5uocUora1AyMaeWR8zQK18x&usqp=CAU" style="height:258px" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Manage Projects</h5>
       <p class="card-text">Assignm evaluate the  grad projects.</p>
@@ -70,8 +70,30 @@
       <small class="text-muted"><a routerLink="/admin/updateweightage" class="nav-link">View Link</a></small>
     </div>
   </div>
+  <div class="card">
+    <img src="https://www.incimages.com/uploaded_files/image/1940x900/getty_854590288_370851.jpg" style="height: 258px;" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">View Trends</h5>
+      <p class="card-text">View the currnet stats across the AU programme</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted"><a routerLink="/admin/trends" class="nav-link">View Link</a></small>
+    </div>
+  </div>
+  
 </div>
-
+<br>
+  <p style="text-align: center;">Candidates List</p>
+  <ag-grid-angular 
+        style="width: 100%; height: 300px;" 
+        class="ag-theme-alpine" 
+          (gridReady)="onGridReady($event)"  
+          [columnDefs]="studentColDefs" 
+          [rowData]="studentRecords" 
+          rowSelection="single" 
+          pagination="true" 
+          paginationPageSize=5  
+        ></ag-grid-angular>
 
 
 
