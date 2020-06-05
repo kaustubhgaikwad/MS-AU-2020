@@ -14,6 +14,7 @@ export class AdminAuthGuard implements CanActivate {
   ) { }
 
   canActivate(){
+    
     let user = this.authService.currentUser;
     
     let admin = this.authService.isAdmin()

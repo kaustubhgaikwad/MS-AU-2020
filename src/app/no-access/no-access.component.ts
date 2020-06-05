@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-no-access',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoAccessComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private studentService:StudentService) { }
+  hello ="";
   ngOnInit(): void {
+    this.hello="hello";
+  }
+  getEmail(){
+    this.studentService.getStudent("email").subscribe();
   }
 
 }

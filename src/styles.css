@@ -23,6 +23,13 @@
         margin-top: 5px;
         padding: 15px;
 }
+body{
+  background-color:#fcfaf0;
+}
+
+.form-control.ng-touched.ng-invalid{
+  border: 2px solid darkslategray;
+}
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);

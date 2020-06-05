@@ -29,6 +29,7 @@ export class AuthService {
 
     //)
   }
+  
 
   login(credentials){
     return this.http.get(`${baseUrl}/${credentials.username}`).map(

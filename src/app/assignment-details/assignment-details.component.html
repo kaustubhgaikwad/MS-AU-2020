@@ -4,32 +4,65 @@
     <form  #f="ngForm">
       <div class="form-group">
         <label for="title">Title</label>
+        <div class="alert alert-danger" *ngIf="title.touched && !title.valid">
+          <div *ngIf="title.errors.required">
+            Should not be empty
+          </div>
+          <div *ngIf="title.errors.minlength">
+            Min Length should be 10
+          </div> 
+        </div>
         <input
           type="text"
           class="form-control"
           id="title"
           [(ngModel)]="currentAssignment.title"
           name="title"
+          #title="ngModel"
+          required
+          minlength="10"
         />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
+        <div class="alert alert-danger" *ngIf="description.touched && !description.valid">
+          <div *ngIf="description.errors.required">
+            Should not be empty
+          </div>
+          <div *ngIf="description.errors.minlength">
+            Min Length should be 10
+          </div> 
+        </div>
         <input
           type="text"
           class="form-control"
           id="description"
           [(ngModel)]="currentAssignment.description"
           name="description"
+          #description="ngModel"
+          required
+          minlength="10"
         />
       </div>
       <div class="form-group" *ngIf="!authService.isAdmin">
         <label for="solution">Solution</label>
+        <div class="alert alert-danger" *ngIf="solution.touched && !solution.valid">
+          <div *ngIf="solution.errors.required">
+            Should not be empty
+          </div>
+          <div *ngIf="solution.errors.minlength">
+            Min Length should be 10
+          </div> 
+        </div>
         <input
           type="text"
           class="form-control"
           id="solution"
           [(ngModel)]="currentSolution"
           name="solution"
+          #solution="ngModel"
+          required
+          minlength="10"
         />
       </div>
       <!-- <div class="form-group">
@@ -44,10 +77,20 @@
       </div> -->
      
       <div *ngIf="!authService.isAdmin()">
-        <button type="submit" class="badge badge-success" (click)="submitAssignment(f.value)">Submit Assignment</button>
+        <button 
+          type="submit" 
+          class="badge badge-success" 
+          [disabled]="!title.valid || !description.valid || !solution.valid" 
+          (click)="submitAssignment(f.value)">
+          Submit Assignment
+        </button>
       </div>
       <div *ngIf="!authService.isAdmin() && isSubmitted">
-        <button type="submit" class="badge badge-success" (click)="updateSubmission()">Submit Again</button>
+        <button 
+          type="submit" 
+          class="badge badge-success"
+          [disabled]="!title.valid || !description.valid || !solution.valid" 
+          (click)="updateSubmission()">Submit Again</button>
       </div>
   
       <!-- <div class="form-group">
@@ -79,7 +122,7 @@
       Delete
     </button>
   
-    <button *ngIf="authService.isAdmin()" type="submit" class="badge badge-success" (click)="updateAssignment()">
+    <button *ngIf="authService.isAdmin()" [disabled]="!title.valid || !description.valid" type="submit" class="badge badge-success" (click)="updateAssignment()">
       Update
     </button>
     <p>{{ message }}</p>
@@ -87,5 +130,5 @@
   
   <div *ngIf="!currentAssignment">
     <br />
-    <p>Cannot access this Tutorial...</p>
+    <p style="display:text-align=cener">Loading Please wait </p>
   </div>
