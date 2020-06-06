@@ -9,38 +9,31 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 let router = {
   navigate: jasmine.createSpy('navigate')
 }
+const authMock = jasmine.createSpyObj('AuthService', ['isAdmin','currentUser']);
 
-class MockService{
-  call(){
-    return "hello";
-  }
-  currentUser={
-    name:"Kaustubh"
-  }
-  isAdmin(){
-    console.log("checking is admin")
-    return true;
-  }
-}
 
 fdescribe('StudentAuthGuardService', () => {
   let service: StudentAuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[{provider:AuthService,useClass:MockService},StudentAuthGuard,{ provide: Router, useValue: router },{provide:HttpClient,useClass:HttpClientTestingModule}]
+      providers:[{provider:AuthService,useValue:authMock},StudentAuthGuard,{ provide: Router, useValue: router },{provide:HttpClient,useClass:HttpClientTestingModule}]
     });
     service = TestBed.inject(StudentAuthGuard);
   });
 
-  it('Testing student auth guard with student', () => {
-    spyOn(service,'canActivate').and.callFake(()=>{
-      return true;
-    })
-    expect(service.canActivate()).toBe(true);
-  });
+  // it('Testing student auth guard with student', () => {
+    
+  //   authMock.isAdmin.and.returnValue(false);
+  //   authMock.currentUser.and.returnValue(true);
+  //   const response = service.canActivate();
+  //   expect(response).toBe(true);
+ 
+  // });
 
   it('Testing student auth guard without student', () => {
+    authMock.isAdmin.and.returnValue(true);
+    authMock.currentUser.and.returnValue(true);
     expect(service.canActivate()).toBe(false);
     
     expect(router.navigate).toHaveBeenCalledWith(['/no-access']);

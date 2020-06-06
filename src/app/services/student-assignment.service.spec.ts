@@ -4,6 +4,11 @@ import { StudentAssignmentService } from './student-assignment.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { of } from 'rxjs/internal/observable/of';
 
+const mockData={
+  studentId:1,
+          assignmentId:1
+}
+
 fdescribe('StudentAssignmentService', () => {
   let service: StudentAssignmentService;
   let httpTestingController: HttpTestingController;
@@ -22,14 +27,6 @@ fdescribe('StudentAssignmentService', () => {
   });
 
   it('Testing student assignment service get all method', () => {
-    spyOn(service,'getAll').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     service.getAll().subscribe(
       data=>{
@@ -38,17 +35,13 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/all');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
+
   });
 
   it('Testing student assignment service get by id method', () => {
-    spyOn(service,'getRecordById').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     service.getRecordById(1).subscribe(
       data=>{
@@ -57,18 +50,13 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/1');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
   });
 
 
   it('Testing student assignment service get all assignments done', () => {
-    spyOn(service,'getAssignmentDone').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     service.getAssignmentDone().subscribe(
       data=>{
@@ -77,17 +65,17 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/assignmentsDone');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
   });
 
   it('Testing student assignment service get assignment by email', () => {
-    spyOn(service,'getRecordByEmail').and.callFake(()=>{
-      return of (
-        {
-          studentEmail:"abc",
-          assignmentId:1
-        }
-      )
-    })
+
+    const responseData={
+      studentEmail:"abc",
+      studentId:1
+    }
 
     service.getRecordByEmail("abc").subscribe(
       data=>{
@@ -96,18 +84,13 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentEmail).toEqual("abc");
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/all/abc');
+    expect(req.request.method).toEqual('GET');
+    req.flush(responseData);
   });
 
   it('Testing student assignment service get assignment by student id', () => {
-    spyOn(service,'getRecordByStudentId').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
-
+    
     service.getRecordByStudentId(1).subscribe(
       data=>{
         let response:any;
@@ -115,17 +98,13 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/studentid/1');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
+    
   });
 
   it('Testing student assignment service get assignment by email and title', () => {
-    spyOn(service,'getRecord').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     service.getRecord("title","email").subscribe(
       data=>{
@@ -134,17 +113,12 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/title/email');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
   });
 
   it('Testing student assignment service calcualte assignment score', () => {
-    spyOn(service,'calculateAssignmentScore').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     service.calculateAssignmentScore(1).subscribe(
       data=>{
@@ -153,17 +127,12 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/score/1');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
   });
 
   it('Testing student assignment service add method', () => {
-    spyOn(service,'addRecord').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     const mockData={
           studentId:1,
@@ -177,18 +146,13 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/add');
+    expect(req.request.method).toEqual('POST');
+    req.flush(mockData);
   });
 
 
   it('Testing student assignment service update method', () => {
-    spyOn(service,'updateRecord').and.callFake(()=>{
-      return of (
-        {
-          studentId:1,
-          assignmentId:1
-        }
-      )
-    })
 
     const mockData={
           studentId:1,
@@ -202,6 +166,10 @@ fdescribe('StudentAssignmentService', () => {
         expect(response.studentId).toEqual(1);
       }
     )
+
+    const req = httpTestingController.expectOne('http://localhost:8080/assignmentrecords/1');
+    expect(req.request.method).toEqual('PUT');
+    req.flush(mockData);
   });
 
 

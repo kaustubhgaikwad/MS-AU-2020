@@ -44,10 +44,6 @@ export class AssignmentDetailsComponent implements OnInit {
             }else{
               this.isSubmitted=false;
             }
-        },error=>{
-          console.log(error);
-          
-          //alert(error);
         }
         
       )

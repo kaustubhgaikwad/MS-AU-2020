@@ -18,14 +18,19 @@ fdescribe('GetstudentdeatilsService', () => {
   });
 
   it('should be created', () => {
-    spyOn(service,'getdetails').and.callFake(()=>{
-      return of (
-        {
-          name:"abcd",
-          score:4
-        }
-      )
-    })
+    // spyOn(service,'getdetails').and.callFake(()=>{
+    //   return of (
+    //     {
+    //       name:"abcd",
+    //       score:4
+    //     }
+    //   )
+    // })
+    const mockData={
+            name:"abcd",
+            score:4
+    }
+    
     service.getdetails().subscribe(
       data=>{
         let responseData:any
@@ -33,5 +38,9 @@ fdescribe('GetstudentdeatilsService', () => {
         expect(responseData.name).toEqual("abcd");
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/studentdetails/details');
+  
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData); 
   });
 });

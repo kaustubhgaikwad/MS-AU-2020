@@ -13,10 +13,6 @@ export class AdminNavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public _opened: boolean = false;
-
-   _toggleSidebar() {
-    this._opened = !this._opened;
-  }
+  
 
 }

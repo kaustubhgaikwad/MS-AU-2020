@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AdminNavBarComponent } from './admin-nav-bar.component';
+import { AuthService } from '../services/auth.service';
+
+class MockAuthService{
+
+}
 
 describe('AdminNavBarComponent', () => {
   let component: AdminNavBarComponent;
@@ -8,6 +13,7 @@ describe('AdminNavBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers:[{provide:AuthService,useClass:MockAuthService}],
       declarations: [ AdminNavBarComponent ]
     })
     .compileComponents();
@@ -20,6 +26,7 @@ describe('AdminNavBarComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+
   });
+
 });

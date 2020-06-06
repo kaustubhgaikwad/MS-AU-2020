@@ -37,16 +37,16 @@ export class AddAssignmentComponent implements OnInit {
           this.submitted = true;
         },
         error => {
-          console.log(error);
+          //console.log(error);
         });
   }
 
-  newAssignment() {
-    this.submitted = false;
-    this.assignment = {
-      title: '',
-      description: ''
-    };
-  }
+  // newAssignment() {
+  //   this.submitted = false;
+  //   this.assignment = {
+  //     title: '',
+  //     description: ''
+  //   };
+  // }
 
 }

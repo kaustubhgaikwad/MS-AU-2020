@@ -46,10 +46,6 @@ export class UpdateWeightageComponent implements OnInit {
       enableSorting: true,  
       editable: true,  
       sortable: true,
-      cellRenderer: 'boldRenderer',
-      getQuickFilterText: function(params) {
-                return params.value.name;
-            }
   },{  
     headerName: 'Student Email',  
     field: 'emailId',  

@@ -26,8 +26,8 @@ export class AdminComponent implements OnInit {
   yAxisLabel = 'Completed No';
   public studentColDefs: ColDef[]; 
   studentRecords:any;
-  private api: GridApi;  
-  private columnApi: ColumnApi;
+  public api: GridApi;  
+  public columnApi: ColumnApi;
 
   constructor(public authService:AuthService,private studentAssignmentService:StudentAssignmentService,private studentService:StudentService) { 
     this.studentColDefs = this.createStudentColDefs();
@@ -53,6 +53,7 @@ export class AdminComponent implements OnInit {
 ]
   }
   onGridReady(params): void {  
+    console.log("params="+params);
     this.api = params.api;  
     this.columnApi = params.columnApi;  
     this.api.sizeColumnsToFit();  
@@ -68,8 +69,6 @@ export class AdminComponent implements OnInit {
     this.studentService.getAll().subscribe(
       data=>{
         this.studentRecords=data;
-      },error=>{
-
       }
     )
 
@@ -94,8 +93,6 @@ export class AdminComponent implements OnInit {
             }
 
           }
-      },error=>{
-
       }
     )
 

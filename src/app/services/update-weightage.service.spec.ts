@@ -2,27 +2,27 @@ import { TestBed } from '@angular/core/testing';
 
 import { UpdateWeightageService } from './update-weightage.service';
 import { of } from 'rxjs/internal/observable/of';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+const mockData={
+          assingment:3,
+          project:4
+}
 
 fdescribe('UpdateWeightageService', () => {
   let service: UpdateWeightageService;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[HttpClientTestingModule]
     });
     service = TestBed.inject(UpdateWeightageService);
+    httpTestingController = TestBed.get(HttpTestingController);
   });
 
   it('Testing update-weightage get ', () => {
-    spyOn(service,'getWeightage').and.callFake(()=>{
-      return of(
-        {
-          assingment:3,
-          project:4
-        }
-      )
-    })
+ 
     service.getWeightage().subscribe(
       data=>{
         let weightage:any;
@@ -30,17 +30,13 @@ fdescribe('UpdateWeightageService', () => {
         expect(weightage.project).toEqual(4);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/weightage/get');
+    expect(req.request.method).toEqual('GET');
+    req.flush(mockData);
   });
 
   it('Testing update-weightage update ', () => {
-    spyOn(service,'update').and.callFake(()=>{
-      return of(
-        {
-          assingment:3,
-          project:4
-        }
-      )
-    })
+    
     const mockData={
         assingment:3,
           project:4
@@ -52,6 +48,10 @@ fdescribe('UpdateWeightageService', () => {
         expect(weightage.project).toEqual(4);
       }
     )
+    const req = httpTestingController.expectOne('http://localhost:8080/weightage/update');
+    expect(req.request.method).toEqual('PUT');
+    req.flush(mockData);
+    
   });
 
 });

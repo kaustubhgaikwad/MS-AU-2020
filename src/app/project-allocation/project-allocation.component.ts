@@ -23,7 +23,7 @@ export class ProjectAllocationComponent implements OnInit {
   private columnApi: ColumnApi;
   studentData:any;
   displayStudentList = true;
-  projectData=new Project();
+  projectData:any;
   currentStudent:any;
   currentProject:any;
   isProjectAllocated:boolean
@@ -45,6 +45,7 @@ export class ProjectAllocationComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    console.log("inside oninit")
     this.displayStudentList=true;
     this.evaluateStatus=false;
     this.getAllRecords();
@@ -88,9 +89,9 @@ export class ProjectAllocationComponent implements OnInit {
 //       this.projectParameters = new projectEvaluation();
         this.projectParameters = data
         console.log("Project Parameters")
-        console.log("Build weightage="+this.projectParameters[0].buildWeightage);
-        console.log("Process weightage="+this.projectParameters[0].processWeightage)
-        console.log("Testing weightage="+this.projectParameters[0].testingWeightage)
+        // console.log("Build weightage="+this.projectParameters[0].buildWeightage);
+        // console.log("Process weightage="+this.projectParameters[0].processWeightage)
+        // console.log("Testing weightage="+this.projectParameters[0].testingWeightage)
       },error=>{
 
       }

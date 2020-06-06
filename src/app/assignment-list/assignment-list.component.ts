@@ -172,24 +172,26 @@ export class AssignmentListComponent implements OnInit {
                   .subscribe(
                     data => {
                       this.assignments = data;
-                      console.log("tut data="+data);
-                      console.log("tut ="+this.assignments[0].title);
-                    },
-                    error => {
-                      console.log(error);
-                    });
+                      //console.log("tut data="+data);
+                      //console.log("tut ="+this.assignments[0].title);
+                    }
+                    // ,
+                    // error => {
+                    //   console.log(error);
+                    // }
+                    );
               }
             
-              refreshList() {
-                this.retrieveAssignments();
-                this.currentAssignment = null;
-                this.currentIndex = -1;
-              }
+              // refreshList() {
+              //   this.retrieveAssignments();
+              //   this.currentAssignment = null;
+              //   this.currentIndex = -1;
+              // }
             
-              setActiveTutorial(tutorial, index) {
-                this.currentAssignment = tutorial;
-                this.currentIndex = index;
-              }
+              // setActiveTutorial(tutorial, index) {
+              //   this.currentAssignment = tutorial;
+              //   this.currentIndex = index;
+              // }
             
               // removeAllTutorials() {
               //   this.assignmentService.deleteAll()
@@ -203,17 +205,17 @@ export class AssignmentListComponent implements OnInit {
               //       });
               // }
             
-              searchTitle() {
-                this.assignmentService.findByTitle(this.title)
-                  .subscribe(
-                    data => {
-                      this.assignments = data;
-                      console.log(data);
-                    },
-                    error => {
-                      console.log(error);
-                    });
-              }
+              // searchTitle() {
+              //   this.assignmentService.findByTitle(this.title)
+              //     .subscribe(
+              //       data => {
+              //         this.assignments = data;
+              //         console.log(data);
+              //       },
+              //       error => {
+              //         console.log(error);
+              //       });
+              // }
 
               changeShowStatus(){
                 this.showSubmission = !this.showSubmission;
