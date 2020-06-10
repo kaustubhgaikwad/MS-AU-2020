@@ -45,6 +45,7 @@ nav {
     position: absolute;
     width: 100%;
     top: 340px;
+    background-color: hsla(0, 0%, 0%, 0.3);
 }
 
 ul {

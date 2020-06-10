@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { StudentService } from '../services/student.service';
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 let toaster={
   success: jasmine.createSpy('success')
@@ -46,6 +47,7 @@ class MockProjectEvaluation{
 fdescribe('ProjectAllocationComponent', () => {
   let component: ProjectAllocationComponent;
   let fixture: ComponentFixture<ProjectAllocationComponent>;
+  let studentService:StudentService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -56,8 +58,8 @@ fdescribe('ProjectAllocationComponent', () => {
         {provide:ProjectEvaluationService,useClass:MockProjectEvaluation},
         {provide:Router,useValue:router},
         {provide:ToastrService,useClass:toaster}
-        
       ],
+      imports:[HttpClientTestingModule],
       declarations: [ ProjectAllocationComponent ]
     })
     .compileComponents();
@@ -66,6 +68,7 @@ fdescribe('ProjectAllocationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProjectAllocationComponent);
     component = fixture.componentInstance;
+    studentService = TestBed.get(StudentService);
     //component.ngOnInit();
     fixture.detectChanges();
   });
@@ -74,12 +77,21 @@ fdescribe('ProjectAllocationComponent', () => {
   //   expect(component).toBeTruthy();
   // });
 
-  // it('test if project allocation data is loaded', () => {
+  it('test if project allocation data is loaded', (done) => {
     
-  //   expect(component.evaluate());
-  //   //component.ngOnInit();
-  //   //expect(component.studentData);
-  //   //expect(component.projectParameters).toBeDefined();
+    //expect(component.evaluate());
 
-  // });
+    //component.ngOnInit();
+    component.getAllRecords();
+    expect(component.studentData).toBeDefined();
+    // studentService.getAll().subscribe(()=>{
+    //   expect(component.studentData).toBeDefined();
+    //   done();
+    // }
+    // )
+    //expect(component.getAllRecords());
+    //expect(component.projectParameters).toBeDefined();
+
+  });
+
 });

@@ -4,19 +4,20 @@
 </div>               
 <router-outlet></router-outlet> 
  -->
- 
+<!--  
  <style>
         div[role=main] > md-content {
             background-image: url("../../assets/img/laptop.jpg");
         }
-</style>
+</style> -->
 <div *ngIf="authService.isLoggedIn()">
 
         <div *ngIf="authService.isAdmin(); then admin else student"></div>
         <ng-template #admin><admin-nav-bar></admin-nav-bar></ng-template>
         <ng-template #student><student-nav-bar></student-nav-bar></ng-template>
-
 </div>
+<router-outlet></router-outlet> 
+
 
 <!-- <img  src="../../assets/img/laptop_Resize.jpg" alt="backgroud image"> -->
 
@@ -100,4 +101,3 @@
         </mat-sidenav-content>
       </mat-sidenav-container>
  </div> -->
- <router-outlet></router-outlet> 

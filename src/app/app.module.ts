@@ -44,6 +44,7 @@ import { UpdateWeightageComponent } from './update-weightage/update-weightage.co
 import {MatSliderModule} from '@angular/material/slider';
 import { ScoreCardComponent } from './score-card/score-card.component';
 import { TrendsComponent } from './trends/trends.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { TrendsComponent } from './trends/trends.component';
     StudentPerformanceComponent,
     UpdateWeightageComponent,
     ScoreCardComponent,
-    TrendsComponent
+    TrendsComponent,
+    QuizComponent
   ],
   imports: [
     MatSliderModule,
@@ -110,6 +112,7 @@ import { TrendsComponent } from './trends/trends.component';
   { path: 'admin/updateweightage', component: UpdateWeightageComponent,canActivate:[AuthGuard]  },
   { path: 'student/assignments', component: AssignmentListComponent ,canActivate:[AuthGuard] },
   { path: 'student/project', component: StudentProjectComponent ,canActivate:[AuthGuard] },
+  { path: 'student/quiz', component: QuizComponent ,canActivate:[AuthGuard]},
   { path: 'score-card/:id', component: ScoreCardComponent ,canActivate:[AuthGuard] },
   { path: 'student/score-card/:id', component: ScoreCardComponent ,canActivate:[AuthGuard] },
   { path: 'student/assignments/submission', component: StudentAssignmentSubmissionComponent,canActivate:[AuthGuard]  },

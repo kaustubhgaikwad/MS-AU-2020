@@ -1,0 +1,130 @@
+<div *ngIf="!isLoaded">
+    <div class="jumbotron">
+    <h1 class="display-4">Lets Take a Quiz!!</h1>
+    <p class="lead">This quiz contains 5 questions you cannot go back to the previous question once attempted, so be carefull.There is no time limit</p>
+    <hr class="my-4">
+    <p>Select the subject on which you want to take a quiz</p>
+    <div class="lead">
+        <form [formGroup]="oppoSuitsForm" (ngSubmit)="onSubmit()">
+
+            <select formControlName="name">
+              <option disabled>Select Subject</option>
+              <option>Subjects</option>
+              <option *ngFor="let suit of oppoSuits;let i = index">{{suit}}</option>
+            </select>
+
+          
+            <button type="submit" class="btn btn-primary">Start</button>
+        </form>
+      <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+    </div>
+  </div>
+</div>
+
+<!-- <form [formGroup]="oppoSuitsForm" (ngSubmit)="onSubmit()">
+
+    <select formControlName="name">
+      <option disabled>Select Oppo Suits</option>
+      <option>Choose oppo suit</option>
+      <option *ngFor="let suit of oppoSuits;let i = index">{{suit}}</option>
+    </select>
+  
+    <button >Submit</button>
+</form> -->
+
+<div *ngIf="isLoaded && !showResult">
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-mobile is-centered">
+          <div class="column is-half">
+            <div class="has-text-centered">
+
+            <h5 class="subtitle has-text-centered is-5">{{quizService.qns[quizService.qnProgress].question}}</h5>
+            <ul>
+            <li *ngFor="let option of quizService.qns[quizService.qnProgress].options;let i = index">
+                
+                <p class="option has-text-grey-dark" (click)="Answer(quizService.qns[quizService.qnProgress].id,i)" >
+                    <span class="has-text-weight-bold is-size-5">{{alphabet[i]}}</span> {{option}}
+                </p>
+
+            </li>
+        </ul>
+            </div>
+            <div>
+                <div style="display: inline-block;margin-left: 10px;">
+                    <span class="rounded"><button type="button"  class="btn btn-danger" (click)="ngOnInit()">Quit</button></span>
+                </div>
+                <div style="display: inline-block;margin-left: 10px;">
+                    <span class="rounded"><button type="button" class="btn btn-success" (click)="submit()">Submit</button></span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+</div>
+
+<div *ngIf="showResult">
+
+    <section class="hero is-primary is-fullheight">
+       
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-mobile is-centered">
+                <h2>Your Accuracy = {{quizService.correctAnswerCount*100/quizService.qns.length }}%</h2>
+                <button type="button" class="btn btn-warning" (click)="ngOnInit()">Take Another quiz</button>
+                <ul>
+                    <li *ngFor="let question of quizService.qns">
+                        <div class="column is-half">
+                            <div class="has-text-centered">
+    
+                            <h5 class="subtitle has-text-centered is-5">{{question.question}}</h5>
+                            
+                            <ul>
+                                <li *ngFor="let option of question.options;let i = index">
+                                    <div *ngIf="question.ans == i+1">
+                                        <p class="correct">
+                                            <span class="has-text-weight-bold is-size-5" >{{alphabet[i]}}</span> 
+                                            {{option}}
+                                            </p>
+                                            <span *ngIf="question.choice == i+1" class="badge badge-success">Correct</span>
+                                    </div>
+                                    
+                                    <div *ngIf="question.choice == i+1 && question.choice!=question.ans">
+                                        <p  class="incorrect" >
+                                            <span class="has-text-weight-bold is-size-5">{{alphabet[i]}}</span> 
+                                            {{option}}
+                                        </p>
+                                        <span class="badge badge-danger">Incorrect</span>
+                                    </div>
+
+                                    <div *ngIf="question.choice != i+1 && question.ans !=i+1">
+                                        <p >
+                                            <span class="has-text-weight-bold is-size-5">{{alphabet[i]}}</span> 
+                                            {{option}}
+                                         </p>
+                                    </div>
+
+                                    
+                                    
+                                </li>
+                            </ul>
+                            
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+          </div>
+        </div>
+        </div>
+      </section>
+
+
+</div>
+
+
+
+
+

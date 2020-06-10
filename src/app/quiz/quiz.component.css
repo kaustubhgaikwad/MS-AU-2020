@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+
+/* option-background: hsl(0, 0%, 100%);
+option-background-hover: hsl(0, 0%, 97%);
+primary-color: hsl(171, 100%, 41%); */
+
+body{
+  font-family: 'Comfortaa', cursive;
+}
+
+.option{
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: .5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: hsl(0, 0%, 100%);
+  
+  
+}
+.option:hover {
+    background: hsl(0, 0%, 97%);
+
+  }
+.option:hover span{
+    background: hsl(171, 100%, 41%);
+      color: white;
+}
+
+.option span{  
+  border-radius: 5px;
+  border: solid 1px hsl(171, 100%, 41%);
+  padding: .2rem .5rem 0;
+  width: 2.5rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  color: hsl(171, 100%, 41%);
+}
+/* 
+.navigation{
+  &:before, &:after{
+    content: ' - ';
+  }
+} */
+.navigation:before{
+    content: ' - ';
+}
+.navigation:after{
+    content: ' - ';
+}
+
+.incorrect{
+    border: 2px solid red;
+    border-radius: 25px;
+}
+.correct{
+  border-radius: 25px;
+    border: 2px solid green;
+}
